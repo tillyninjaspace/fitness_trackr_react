@@ -1,0 +1,33 @@
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    background-color:  #2155a3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+
+.mainHeader {
+    font-size: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Caveat', cursive;
+    /* font-family: 'Righteous', cursive; */
+    height: 70px;
+    color: white;
+}
+
+.forms {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.submitButton {
+    padding: 3px;
+}
+
+input {
+    padding: 3px;
+}
