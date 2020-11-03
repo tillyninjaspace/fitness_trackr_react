@@ -8,7 +8,7 @@ import
 const Header = () => {
     return (
         <header>
-        <h1 className='mainHeader'>Fitness Tracker</h1>
+        <h1 className='mainHeader'>Fitness Tracker Node_Modules Problems?</h1>
         <Forms />
         
         </header>

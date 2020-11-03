@@ -15,7 +15,7 @@ const Routines = ({routinesList}) => {
                 <p><b>Username:</b>{routine.creatorName}</p>
                 <p className="actList"><b>Activities:</b>
                 {routine.activities.map((activity) => 
-                    <div>
+                    <div key={activity.id}>
                     <p><b>Activity Name:{activity.name}</b></p>
                     <p><b>Activity Description:</b>{activity.description}</p>
                     </div>

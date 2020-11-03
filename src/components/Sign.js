@@ -5,30 +5,59 @@ import './Sign.css'
 const Forms = () => {
 
     //Still working on all of this
-    //Problem: Line 26 shows undefined in console.log
+    //Problem
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [token, setToken] = useState('')
 
-    const handleSubmit = (event) => {
-            event.preventDefault();
-            fetch('https://infinite-thicket-81951.herokuapp.com/api/users/login', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                username: {username},
-                password: {password}
-            })
-            }).then(response => {
-            console.log(response) 
-            response.json()
-            })
-            .then(result => {
-            console.log(result);
-            // return result
-            })
-            .catch(console.error);
+    const handleSubmit = async (event) => {
+//TRY CATCH TIME
+    event.preventDefault();
+try {    
+    const response = await fetch('https://infinite-thicket-81951.herokuapp.com/api/users/login', {
+    method: "POST",
+    headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        username: {username},
+        password: {password}
+    })
+    });
+    console.log("what is the response", response)
+    const responseJson = await response.json()
+    console.log(responseJson);
+    // return result
+} catch(error) {
+  console.error(error)
+}
+
+
+//END TRY CATCH
+
+
+
+
+
+            // event.preventDefault();
+            // await fetch('https://infinite-thicket-81951.herokuapp.com/api/users/login', {
+            // method: "POST",
+            // headers: {
+            //     'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //     username: {username},
+            //     password: {password}
+            // })
+            // }).then(response => {
+            // console.log(response) 
+            // await response.json()
+            // })
+            // .then(result => {
+            // console.log(result);
+            // // return result
+            // })
+            // .catch(console.error);
     }
 //still working on the handleSubmit button above
     return (
