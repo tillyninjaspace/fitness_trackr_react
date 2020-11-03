@@ -1,3 +1,22 @@
 .activityItem {
     border: 1px solid gray;
 }
+
+.newActivity {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.newActivityForm {
+    max-width: 500px;
+    text-align: center;
+    background-color: rgb(133, 148, 161);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.newActivityForm button {
+    padding: 5px;
+}

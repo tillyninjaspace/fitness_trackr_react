@@ -3,8 +3,16 @@ import './Activities.css';
 
 const Activities = ({activitiesList}) => {
     return (
-        <>
+        <div className="newActivity">
         <h1 style={{textAlign: "center"}}>Activities</h1>
+
+        <form className='newActivityForm'>
+            <h2>Create a New Activity</h2>
+            <input type="text" placeholder="name"/>
+            <input type="text" placeholder="description"/>
+            <button>Submit</button>
+        </form>
+
         <div className="activitiesSection">
         
         {
@@ -16,7 +24,7 @@ const Activities = ({activitiesList}) => {
             )
         }   
         </div>
-        </>
+        </div>
     )
 }
 

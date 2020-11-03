@@ -1,3 +1,14 @@
-.myForm {
+.myRoutinesSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.myRoutineForm {
     border: 1px solid gray;
+    max-width: 500px;
+    text-align: center;
+    background-color: rgb(133, 148, 161);
+    padding: 5px;
+    border-radius: 5px;
 }

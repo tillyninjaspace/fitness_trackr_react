@@ -6,10 +6,10 @@ const MyRoutines = () => {
  
 
     return (
-        <>
+        <div class="myRoutinesSection">
         <h1>My Routines</h1>
 
-        <form className='myForm'>
+        <form className='myRoutineForm'>
             <h2>Create a New Routine</h2>
             <input type="text" placeholder="name"/>
             <input type="text" placeholder="goal"/>
@@ -19,13 +19,13 @@ const MyRoutines = () => {
             </select>
         </form>
 
-
-        <form className='myForm'>
+{/* moving form below under Activities */}
+        {/* <form className='myForm'>
             <h2>Create a New Activity</h2>
             <input type="text" placeholder="name"/>
             <input type="text" placeholder="description"/>
-        </form>
-        </>
+        </form> */}
+        </div>
     )
 }
 

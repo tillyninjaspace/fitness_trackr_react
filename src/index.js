@@ -27,7 +27,7 @@ const App = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-         //new
+         //need to review
         setLoading(true)
         getRoutines()
             .then(routines => {
@@ -48,7 +48,7 @@ const App = () => {
             .catch(error => {
                 console.error(error)
             })
-            //new
+            //need to review loading
             .finally(() => { setLoading(false) })
 
     }, []);
@@ -61,33 +61,32 @@ const App = () => {
        
             <div id="bigHoncho">
                 <Header />
-<NavLink to="/" activeClassName="current">Home</NavLink >
-<NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
-<NavLink to="/routines" activeClassName="current">Routines</NavLink>
+                <NavLink to="/" activeClassName="current">Home</NavLink >
+                <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
+                <NavLink to="/routines" activeClassName="current">Routines</NavLink>
 
 
-{/* working on NavLink */}
-<Switch>
+
+                <Switch>
 {/* <Route exact path="my-routines"><MyRoutines />  </Route>     */}
-<Route path="/my-routines"><MyRoutines /> </Route>      
-<Route exact path="/routines">
-
-                <Routines routinesList={routinesList}/>
-</Route>                
+                <Route path="/my-routines"><MyRoutines /> </Route>      
+                <Route exact path="/routines">
+                <Routines routinesList={routinesList}/> </Route> 
+                                
                 <Activities activitiesList={activitiesList} />
                 
                 {loading ? <Loading /> : null}
 {/* working on this                 */}
 
-        <Route exact path="/">
-        <h2 style={{ padding: ".5em"}}>Please log in, above.</h2>
-        
-        </Route>
-        <Redirect to="/" />
-</Switch>        
-{/* working on this ends */}
+                <Route exact path="/">
+                <h2 style={{ padding: ".5em"}}>Please log in, above.</h2>
+                </Route>
 
-                <Footer />
+                <Redirect to="/" />
+                </Switch>        
+
+
+                 <Footer />
             </div>
           
     )
@@ -95,10 +94,9 @@ const App = () => {
 
 
 ReactDOM.render(
-    // router new
-<Router>   
+    <Router>   
     <App/>
     </Router> ,
     document.getElementById('root')
 
-  )
+)
