@@ -4,6 +4,9 @@
     align-items: center;
 }
 
+.myRoutineForm button {
+    padding: 5px;
+}
 .myRoutineForm {
     border: 1px solid gray;
     max-width: 500px;

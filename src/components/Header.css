@@ -31,3 +31,10 @@ header {
 input {
     padding: 3px;
 }
+
+.current {
+    background-color: #2155a3;
+    padding: 7px;
+    color: white;
+    border-radius: 5px;
+}

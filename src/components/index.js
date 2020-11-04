@@ -5,3 +5,8 @@ export { default as Activities } from './Activities';
 export { default as Loading} from './Loading';
 
 export { default as MyRoutines } from './MyRoutines';
+export { default as NewAccount } from './NewAccount';
+
+
+//STRETCH GOAL -- COME BACK IF HAVE TIME
+// export { default as SingleUser } from './SingleUser';

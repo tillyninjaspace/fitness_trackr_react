@@ -5,7 +5,7 @@ const BASE = `http://infinite-thicket-81951.herokuapp.com/api`
 export async function getRoutines() {
     try {
       const data  = await fetch(`${ BASE }/routines`);
-      console.log("What are routines under API section", data)
+      // console.log("What are routines under API section", data)
       const jsonData = await data.json()
     
       return jsonData
@@ -17,7 +17,7 @@ export async function getRoutines() {
 export async function getActivities() {
     try {
       const data  = await fetch(`${ BASE }/activities`);
-      console.log("What are activities under API section", data)
+      // console.log("What are activities under API section", data)
       const jsonData = await data.json()
     
       return jsonData

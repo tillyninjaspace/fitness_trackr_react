@@ -16,6 +16,7 @@ import {
     Activities,
     Loading,
     MyRoutines,
+    // SingleUser,
     Footer
   } from './components';
 
@@ -25,6 +26,7 @@ const App = () => {
     const [routinesList, setRoutines] = useState([])
     const [activitiesList, setActivities] = useState([])
     const [loading, setLoading] = useState(false)
+    const [token, setToken] =useState('')
 
     useEffect(() => {
          //need to review
@@ -53,39 +55,37 @@ const App = () => {
 
     }, []);
 
-
-    console.log("list:", routinesList)
-   
+  console.log("What is the token inside of Main Index.JS?", token)
 
     return (
        
             <div id="bigHoncho">
-                <Header />
-                <NavLink to="/" activeClassName="current">Home</NavLink >
-                <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
+                <Header token={token} setToken={setToken}/>
+                <NavLink to="/">Home</NavLink>
                 <NavLink to="/routines" activeClassName="current">Routines</NavLink>
-
+                <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
+                <NavLink to="/activities" activeClassName="current">Activities</NavLink>
 
 
                 <Switch>
-{/* <Route exact path="my-routines"><MyRoutines />  </Route>     */}
+
                 <Route path="/my-routines"><MyRoutines /> </Route>      
                 <Route exact path="/routines">
                 <Routines routinesList={routinesList}/> </Route> 
-                                
-                <Activities activitiesList={activitiesList} />
-                
+
+                <Route exact path="/activities">          
+                <Activities activitiesList={activitiesList} setActivities={setActivities} token={token}/>
+                </Route> 
                 {loading ? <Loading /> : null}
-{/* working on this                 */}
+               
 
                 <Route exact path="/">
                 <h2 style={{ padding: ".5em"}}>Please log in, above.</h2>
                 </Route>
 
                 <Redirect to="/" />
-                </Switch>        
-
-
+                </Switch>  
+  
                  <Footer />
             </div>
           
@@ -100,3 +100,16 @@ ReactDOM.render(
     document.getElementById('root')
 
 )
+
+
+
+
+
+
+
+//STRETCH GOALS FOR LATER:
+{/* //new params     -- NEEDS WORK           */}
+    {/* <Route path="/users/:username/routines">
+      {routinesList && <SingleUser routinesList={routinesList}/>}
+    </Route> */}
+{/* new params ends nov 3 */}

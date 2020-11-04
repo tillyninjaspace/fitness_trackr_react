@@ -1,4 +1,6 @@
 import React from 'react'
+//STRETCH GOALfor LINK
+// import {Link} from 'react-router-dom';
 import './Routines.css'
 
 const Routines = ({routinesList}) => {
@@ -15,7 +17,13 @@ const Routines = ({routinesList}) => {
                 <section>
                 <h3>{routine.name}</h3>
                 <p><b>Goal:</b>{routine.goal}</p>
-                <p><b>Username:</b>{routine.creatorName}</p>
+                <p><b>
+        {/* new param STRETCH GOAL -- come back if have time*/}
+       {/* {routine.creatorName && <Link to={`/users/${routine.creatorName}/routines`}>{routine.creatorName}</Link>} */}
+       {/* new param ends */}
+                    Username:</b>{routine.creatorName}
+                    
+                </p>
                 </section>
 
                 <section className="actList">

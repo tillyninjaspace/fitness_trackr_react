@@ -3,10 +3,8 @@ import './MyRoutines.css'
 
 const MyRoutines = () => {
 
- 
-
     return (
-        <div class="myRoutinesSection">
+        <div className="myRoutinesSection">
         <h1>My Routines</h1>
 
         <form className='myRoutineForm'>
@@ -17,14 +15,8 @@ const MyRoutines = () => {
             <option value="true">Yes</option>
             <option value="false">No</option>
             </select>
+            <button>Add Routine</button>
         </form>
-
-{/* moving form below under Activities */}
-        {/* <form className='myForm'>
-            <h2>Create a New Activity</h2>
-            <input type="text" placeholder="name"/>
-            <input type="text" placeholder="description"/>
-        </form> */}
         </div>
     )
 }
