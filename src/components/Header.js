@@ -85,7 +85,7 @@ const Header = (props) => {
     
     return (
         <header>
-        <h1 className='mainHeader'>Fitness Tracker</h1>
+        <h1 className='mainHeader'>Fitness Tracker B</h1>
         {/* <Forms /> */}
         <LogInForm />
         <NewAccount />
