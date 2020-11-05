@@ -31,8 +31,11 @@ const Header = (props) => {
           headers: {
               'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ username: `{username}`, 
-                                     password: `{password}`
+              body: JSON.stringify({ 
+                  username: `${username}`, password: `${password}`
+                  
+                                    // username: `{username}`, 
+                                    //  password: `{password}`
           })
           });
           console.log("what is the log in response", response)
@@ -41,7 +44,7 @@ const Header = (props) => {
           console.log("What is LOG-IN data", data)
           console.log("What is LOG-IN token?", data.token)
 //GETTING USER IS NOT WORKING          
-        //   await setToken(data.token)
+          await setToken(data.token)
         //   const trygettinguser = await getUser(token)
         //   console.log("Do we see user info", trygettinguser)
           console.log("What is LOG-in token after setToken func", token)
@@ -97,7 +100,7 @@ const Header = (props) => {
         const [newPassword, setNewPassword] = useState('')
 
           const handleSubmit = async (event) => {
-        //   console.log("What is NEW ACCOUNT username and password input",username, password)
+        //   console.log("What is NEW ACCOUNT username and password input", newUsername, newPassword)
       //TRY CATCH
           event.preventDefault();
       try {    
