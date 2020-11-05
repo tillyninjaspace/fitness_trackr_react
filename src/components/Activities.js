@@ -34,7 +34,7 @@ const Activities = (props) => {
             console.log("What is the response from the activities form", response)
             const data = await response.json()
             console.log("What is the dataJSON from activities form", data)
-            
+
             const newActivitiesList = [...activitiesList, data]
             console.log("What is the New Activites List", newActivitiesList)
             setActivities(newActivitiesList)
@@ -64,12 +64,12 @@ const Activities = (props) => {
         >
             <h2>Create a New Activity</h2>
             {/* //temporary id to see if it's going to render */}
-            <input type="number" placeholder="id"
+            {/* <input type="number" placeholder="id"
                 value={activityid}
                 onChange={(event) => {
                     setActivityid(event.target.value)
                 }}
-            />
+            /> */}
 
             <input type="text" placeholder="name" 
                 value={ name }
@@ -92,7 +92,7 @@ const Activities = (props) => {
         <div className="activitiesSection">
         
         {
-            activitiesList.map((activity, idx)  => 
+            activitiesList.map((activity)  => 
                 <div key={activity.id} 
                 // <div key={idx} 
                 className='activityItem'>
