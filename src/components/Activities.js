@@ -7,6 +7,9 @@ const Activities = (props) => {
     console.log("what are the props under Activities ", props)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    //temporary id for testing for render
+    const [activityid, setActivityid] = useState('')
+    const {token} = props
 
 
     //This is BREAKING!
@@ -23,7 +26,7 @@ const Activities = (props) => {
                     },
                 body: JSON.stringify({
                 name: '{name}',
-                description: '{description}!'
+                description: '{description}'
                 })
             })
 
@@ -41,14 +44,23 @@ const Activities = (props) => {
             event.preventDefault()
             console.log("What's the name?", name)
             console.log("What's the description?", description)
-            const activitiesListCopy = [...activitiesList, {name: {name}, description: {description}}]
+            const activitiesListCopy = [...activitiesList, { id: Number(`${activityid}`), name: `${name}`, description: `${description}`}]
             console.log("what is the copy", activitiesListCopy)
-
+            // setActivities(activitiesListCopy)
+            //set Activities up there is breaking everything
             setName('')
             setDescription('')
             }}
         >
             <h2>Create a New Activity</h2>
+            {/* //temporary id to see if it's going to render */}
+            <input type="number" placeholder="id"
+                value={activityid}
+                onChange={(event) => {
+                    setActivityid(event.target.value)
+                }}
+            />
+
             <input type="text" placeholder="name" 
                 value={ name }
                 onChange={(event) => {
@@ -70,8 +82,10 @@ const Activities = (props) => {
         <div className="activitiesSection">
         
         {
-            activitiesList.map((activity)  => 
-                <div key={activity.id} className='activityItem'>
+            activitiesList.map((activity, idx)  => 
+                // <div key={activity.id} 
+                <div key={idx} 
+                className='activityItem'>
                 <h3>{activity.name}</h3>
                 <p><b>Description:</b>{activity.description}</p>
                 </div>

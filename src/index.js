@@ -55,7 +55,16 @@ const App = () => {
 
     }, []);
 
+    // useEffect(() => {
+    //     console.log("looking for activities changes")
+     
+
+
+    // }, [activitiesList])
+
+
   console.log("What is the token inside of Main Index.JS?", token)
+  console.log("What is the ActivitiesList after update", activitiesList)
 
     return (
        

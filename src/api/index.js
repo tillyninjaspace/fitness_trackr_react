@@ -1,4 +1,5 @@
-const BASE = `http://infinite-thicket-81951.herokuapp.com/api`
+const BASE = 'http://localhost:4000/api'
+const BASE2 = `http://infinite-thicket-81951.herokuapp.com/api`
 // `http://infinite-thicket-81951.herokuapp.com/api/routines`
 // const BASE = 'http://fitnesstrac-kr.herokuapp.com/api/'
 
@@ -24,7 +25,32 @@ export async function getActivities() {
     } catch (error) {
       throw error;
     }
-}  
+}
+
+
+//Nov 4, 2020 -- Working on this
+export async function getUser(token) {
+  try { 
+    const data = await fetch(`${ BASE2 }/users/me`, {
+    headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+})
+  console.log(data)
+  const response = await data.json()
+  console.log("What is response under API getUser", response)
+    // if (!token) {
+    //   return
+    // }
+    // if (response.username) {
+    //   setCurrentUser(response.username)
+    // }
+
+    } catch(error) {
+      throw error;
+  }
+}
 
 //Old Jquery Example from my Stranger's things for reference
 // const signUp = async (username, password) => {

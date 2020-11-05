@@ -1,12 +1,16 @@
+//I might not need this section if I add it to the header
+
 import React, {useState} from 'react';
 import './Header.css'
 import './Sign.css'
 
-const NewAccount = () => {
+const NewAccount = (props) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useState('')
+  const {token} = props
+
+  console.log("What are the props under New Account Form", prop)
 
     const handleSubmit = async (event) => {
     console.log("What is NEW ACCOUNT username and password",username, password)
@@ -19,8 +23,8 @@ try {
         'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-        username: '{username}',
-        password: '{password}'
+        username: `{username}`,
+        password: `{password}`
     })
     });
     console.log("what is the log in response", response)
