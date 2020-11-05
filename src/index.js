@@ -81,7 +81,9 @@ const App = () => {
 
                 <Switch>
 
-                <Route path="/my-routines"><MyRoutines /> </Route>      
+                <Route path="/my-routines"><MyRoutines currentUsername={currentUsername}
+                    token={token} routinesList={routinesList} setRoutines={setRoutines} /> 
+                </Route>      
                 <Route exact path="/routines">
                 <Routines routinesList={routinesList}/> </Route> 
 

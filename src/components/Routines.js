@@ -21,22 +21,25 @@ const Routines = ({routinesList}) => {
         {/* new param STRETCH GOAL -- come back if have time*/}
        {/* {routine.creatorName && <Link to={`/users/${routine.creatorName}/routines`}>{routine.creatorName}</Link>} */}
        {/* new param ends */}
-                    Username:</b>{routine.creatorName}
+                    Creator:</b>{routine.creatorName}
                     
                 </p>
                 </section>
-
+            { routine.activities ? 
                 <section className="actList">
                 <p>Activities:</p>
                     {routine.activities.map((activity) => 
-                    <div key={activity.id}>
-                    <p><b>Activity Name:</b>{activity.name}</p>
-                    <p><b>Activity Description:</b>{activity.description}</p>
+                    <div key={activity.id} className="eachActivity">
+                    <p>Name:{activity.name}</p>
+                    <p>Description:{activity.description}</p>
+                    <p>Duration: {activity.duration}</p>
+                    <p>Count: {activity.count}</p>
                     </div>
                     )
                     }
                 </section>
-                
+                : ''
+            }     
                 </div>
             )
         }   

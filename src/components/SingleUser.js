@@ -10,12 +10,13 @@ console.log("is this working for SINGLEUSER")
 export default (props) => {
     console.log("What are props inside of SingleUser", props)
     console.log("hello single user")
-    const  {routinesList, currentUsername} = props
     const {username} = useParams();
-
+    const  {routinesList, currentUsername} = props
+   
     const [filteredUser] = routinesList.filter(routine => username === routine.creatorName);
     console.log('filteredUser: ', filteredUser);
-    
+    // const [filteredUserName] = routinesList.filter(routine => currentUsername === routine.creatorName);
+    //    console.log('filteredUserName: ', filteredUserName);   
     
     return <>
       <div>
@@ -43,7 +44,10 @@ export default (props) => {
 
 
   //Extra Stuff
+//   const {username} = useParams();
        {/* {filteredUser && <Routines userRoutines={filteredUser} />} */}
 //This works but maybe for MyRoutines
     //    const [filteredUserName] = routinesList.filter(routine => currentUsername === routine.creatorName);
     //    console.log('filteredUserName: ', filteredUserName);     
+    // const [filteredUser] = routinesList.filter(routine => username === routine.creatorName);
+    // console.log('filteredUser: ', filteredUser);

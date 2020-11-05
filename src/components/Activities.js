@@ -36,7 +36,7 @@ const Activities = (props) => {
             console.log("What is the dataJSON from activities form", data)
 
             const newActivitiesList = [...activitiesList, data]
-            console.log("What is the New Activites List", newActivitiesList)
+            console.log("What is the New Activities List", newActivitiesList)
             setActivities(newActivitiesList)
 
         } catch (error) {

@@ -21,3 +21,7 @@
     border: 1px solid black;
     padding: 5px;
 }
+
+.eachActivity {
+    border: 1px solid lightgray;
+}
