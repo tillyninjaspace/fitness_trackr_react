@@ -31,7 +31,7 @@ export async function getActivities() {
 //Nov 4, 2020 -- Working on this
 export async function getUser(token) {
   try { 
-    const data = await fetch(`${ BASE2 }/users/me`, {
+    const data = await fetch(`${ BASE }/users/me`, {
     headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`

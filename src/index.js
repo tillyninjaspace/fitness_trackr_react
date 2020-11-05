@@ -19,6 +19,7 @@ import {
     // SingleUser,
     Footer
   } from './components';
+import SingleUser from './components/SingleUser';
 
 
 
@@ -27,6 +28,8 @@ const App = () => {
     const [activitiesList, setActivities] = useState([])
     const [loading, setLoading] = useState(false)
     const [token, setToken] =useState('')
+// Nov 5 working on currentUsername morning    
+    const [currentUsername, setCurrentUsername] = useState('sandra')
 
     useEffect(() => {
          //need to review
@@ -69,7 +72,7 @@ const App = () => {
     return (
        
             <div id="bigHoncho">
-                <Header token={token} setToken={setToken}/>
+                <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername}/>
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/routines" activeClassName="current">Routines</NavLink>
                 <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
@@ -86,8 +89,10 @@ const App = () => {
                 <Activities activitiesList={activitiesList} setActivities={setActivities} token={token}/>
                 </Route> 
                 {loading ? <Loading /> : null}
-               
-
+{/* to get routines by username  Nov 5           */}
+<Route path="/users/:username/routines">
+< SingleUser routinesList={routinesList} currentUsername={currentUsername}/> 
+</Route>
                 <Route exact path="/">
                 <h2 style={{ padding: ".5em"}}>Please log in, above.</h2>
                 </Route>

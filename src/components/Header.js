@@ -15,7 +15,7 @@ const BASE = 'http://localhost:4000/api'
 const Header = (props) => {
     console.log("Header props", props)
     
-    const {token, setToken} = props
+    const {token, setToken, setCurrentUsername, currentUsername} = props
 
 //LOGIN
     const LogInForm = () => {
@@ -33,9 +33,6 @@ const Header = (props) => {
               },
               body: JSON.stringify({ 
                   username: `${username}`, password: `${password}`
-                  
-                                    // username: `{username}`, 
-                                    //  password: `{password}`
           })
           });
           console.log("what is the log in response", response)
@@ -45,6 +42,7 @@ const Header = (props) => {
           console.log("What is LOG-IN token?", data.token)
 //GETTING USER IS NOT WORKING          
           await setToken(data.token)
+          await setCurrentUsername(data.user.username)
         //   const trygettinguser = await getUser(token)
         //   console.log("Do we see user info", trygettinguser)
           console.log("What is LOG-in token after setToken func", token)
@@ -60,6 +58,7 @@ const Header = (props) => {
       }
       //END TRY CATCH
       console.log("What is token outside the function", token)
+      console.log("What is the USERNAME outside the function", currentUsername)
       //still working on the handleSubmit button above
           return (
               <div className='forms'>

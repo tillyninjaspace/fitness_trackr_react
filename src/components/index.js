@@ -9,4 +9,4 @@ export { default as NewAccount } from './NewAccount';
 
 
 //STRETCH GOAL -- COME BACK IF HAVE TIME
-// export { default as SingleUser } from './SingleUser';
+export { default as SingleUser } from './SingleUser';

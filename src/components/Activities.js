@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './Activities.css';
 
+const BASE = 'http://localhost:4000/api'
+// my heroku link: 'http://infinite-thicket-81951.herokuapp.com/api/activities'
 
 const Activities = (props) => {
     const {activitiesList, setActivities} = props
@@ -18,18 +20,20 @@ const Activities = (props) => {
         event.preventDefault()
 
         try {
-            const response = await fetch('http://infinite-thicket-81951.herokuapp.com/api/activities', {
+            const response = await fetch('http://localhost:4000/api/activities', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                     },
                 body: JSON.stringify({
-                name: '{name}',
-                description: '{description}'
+                name: `${name}`,
+                description: `${description}`
                 })
             })
-
+            console.log("What is the response from the activities form", response)
+            const data = await response.json()
+            console.log("What is the dataJSON from activities form", data)
         } catch (error) {
             console.error(error)
         }
@@ -40,17 +44,18 @@ const Activities = (props) => {
         <h1 style={{textAlign: "center"}}>Activities</h1>
 
         <form className='newActivityForm'
-            onSubmit={(event) =>  {
-            event.preventDefault()
-            console.log("What's the name?", name)
-            console.log("What's the description?", description)
-            const activitiesListCopy = [...activitiesList, { id: Number(`${activityid}`), name: `${name}`, description: `${description}`}]
-            console.log("what is the copy", activitiesListCopy)
-            // setActivities(activitiesListCopy)
-            //set Activities up there is breaking everything
-            setName('')
-            setDescription('')
-            }}
+            onSubmit={handleSubmit}
+            // {(event) =>  {
+            // event.preventDefault()
+            // console.log("What's the name?", name)
+            // console.log("What's the description?", description)
+            // const activitiesListCopy = [...activitiesList, { id: Number(`${activityid}`), name: `${name}`, description: `${description}`}]
+            // console.log("what is the copy", activitiesListCopy)
+            // // setActivities(activitiesListCopy)
+            // //set Activities up there is breaking everything
+            // setName('')
+            // setDescription('')
+            // }}
         >
             <h2>Create a New Activity</h2>
             {/* //temporary id to see if it's going to render */}
@@ -83,8 +88,8 @@ const Activities = (props) => {
         
         {
             activitiesList.map((activity, idx)  => 
-                // <div key={activity.id} 
-                <div key={idx} 
+                <div key={activity.id} 
+                // <div key={idx} 
                 className='activityItem'>
                 <h3>{activity.name}</h3>
                 <p><b>Description:</b>{activity.description}</p>

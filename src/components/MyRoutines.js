@@ -1,7 +1,8 @@
 import React from 'react';
 import './MyRoutines.css'
 
-const MyRoutines = () => {
+const MyRoutines = (props) => {
+    console.log("What are the props under MyRoutines", props)
 
     return (
         <div className="myRoutinesSection">
