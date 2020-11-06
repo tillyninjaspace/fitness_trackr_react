@@ -29,7 +29,7 @@ const App = () => {
     const [loading, setLoading] = useState(false)
     const [token, setToken] =useState('')
 // Nov 5 working on currentUsername morning    
-    const [currentUsername, setCurrentUsername] = useState('sandra')
+    const [currentUsername, setCurrentUsername] = useState('')
 
     useEffect(() => {
          //need to review

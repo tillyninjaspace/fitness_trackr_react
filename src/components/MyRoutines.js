@@ -8,10 +8,11 @@ const MyRoutines = (props) => {
     const [isPublic, setIsPublic] = useState(true)
 
 // useState For Editing a Routine    
-    const [ editName, setEditName ] = ('')
-    const [ editGoal, setEditGoal ] = ('')
+    const [ editName, setEditName ] = useState('')
+    const [ editGoal, setEditGoal ] = useState('')
+    const [ editId, setEditId ] = useState(1)
 // useState for Editing ends
-
+console.log(editId)
     const { currentUsername, routinesList, setRoutines, token} = props
 
 //Filtering Routines by Logged in Username
@@ -84,7 +85,11 @@ const MyRoutines = (props) => {
                 <h4>{userRoutine.name}</h4>
                 <p>Goal:{userRoutine.goal}</p>
                 <p>Creator:{userRoutine.creatorName}</p>
-                <button className="edit">Edit</button>
+                <button className="edit" onClick={() => {
+                    setEditName(userRoutine.name)
+                    setEditGoal(userRoutine.goal)
+                    setEditId(userRoutine.id)
+                }}>Edit</button>
                 <button className="delete">Delete</button>
                 </div>
             )
@@ -104,6 +109,7 @@ const MyRoutines = (props) => {
             <input type="text" placeholder="goal" value={ editGoal }
                 onChange={(event) => {
                     setEditGoal(event.target.value)
+
                 }}
                 />
             <label>Public? 
