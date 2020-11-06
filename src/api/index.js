@@ -28,7 +28,7 @@ export async function getActivities() {
 }
 
 
-//Nov 4, 2020 -- Working on this Nov 6 working on this again -- Comes back as object on this side only
+//Nov 6, 2020 Works now
 export async function getUser(token) {
   try { 
     const data = await fetch(`${ BASE }/users/me`, {
@@ -45,15 +45,40 @@ export async function getUser(token) {
     } else {
     return response
     }
-    //HAHAHA, ^^^ I forgot to return response
-    // if (response.username) {
-    //   setCurrentUser(response.username)
-    // }
+    // ^^^ I forgot to return response --  important reminder
 
     } catch(error) {
       throw error;
   }
 }
+
+
+//Working on Delete Functon now
+export async function deleteRoutine(routineId, token) {
+  // const handleSubmit = async (event) => {
+  //   console.log("What is the new Routine name and goal", name, goal)
+  //   event.preventDefault()
+
+    try {
+        const data = await fetch(`http://localhost:4000/api/routines/${routineId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+                }
+        })
+        console.log("What is the data from the delete button", data)
+        const response = await data.json()
+        console.log("what is the response from the delete button", response)
+        return response
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+
+
 
 
 // FORMAT TO follow from Routines that returned a correct object format

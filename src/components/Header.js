@@ -53,7 +53,7 @@ const Header = (props) => {
 //End Getting User          
           console.log("What is LOG-in token after setToken func", token)
           if (data.error) {
-            setErrorMessage(data.message)
+            setErrorMessage(data.message) || setErrorMessage(data.error + '. No username found.')
         } else {
             setErrorMessage('')
         }

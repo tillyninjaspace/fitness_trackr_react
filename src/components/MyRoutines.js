@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './MyRoutines.css'
 
+import { deleteRoutine } from '../api';
+
 const MyRoutines = (props) => {
     console.log("What are the props under MyRoutines", props)
     const [name, setName] = useState('')
@@ -55,11 +57,12 @@ console.log(editId)
                 const data = await response.json()
                 console.log("What is the dataJSON from routines form", data)
                
-                const newRoutinesList = [...routinesList, data]
+                const newRoutinesList = [...routinesList]
                 console.log("What is the New Routines List", newRoutinesList)
-               
+                newRoutinesList.unshift(data)
                 setRoutines(newRoutinesList)
-
+                setName('')
+                setGoal('')
     
             } catch (error) {
                 console.error(error)
@@ -133,7 +136,7 @@ console.log(editId)
 {/* New                 */}
       { console.log("What is the list of ROUTINES by Username inside of return", routinesbyUsername)}
         { routinesbyUsername && routinesbyUsername.length > 0 &&  routinesbyUsername.map((userRoutine) => 
-                <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}}>
+                <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}} className="routineCard">
                 <h4>{userRoutine.name}</h4>
                 <p>Goal:{userRoutine.goal}</p>
                 <p>Creator:{userRoutine.creatorName}</p>
@@ -142,7 +145,20 @@ console.log(editId)
                     setEditGoal(userRoutine.goal)
                     setEditId(userRoutine.id)
                 }}>Edit</button>
-                <button className="delete">Delete</button>
+                <button className="delete" onClick={(event) => {
+                    console.log("What is the this routine.id value", userRoutine.id)
+                    console.log("delete button")
+//This works now and renders the disappearance
+                    const newList = [...routinesList]
+                    const index = newList.findIndex(a => a.id === userRoutine.id);
+                    console.log("WhaT is this index", index)
+                    if (index === -1) return;
+                    newList.splice(index, 1);
+                    setRoutines(newList)
+
+                   
+                    deleteRoutine(userRoutine.id, token)
+                }}>Delete</button>
                 </div>
             )
         }
@@ -164,12 +180,12 @@ console.log(editId)
 
                 }}
                 />
-            <label>Public? 
+            {/* <label>Public? 
             <select>
             <option value="true">Yes</option>
             <option value="false">No</option>
             </select>
-            </label>   
+            </label>    */}
             <button style={{padding: "5px", color: "purple", 
                  border: "1 solid black"}}>
                 Edit Routine</button>
