@@ -16,15 +16,23 @@ const MyRoutines = (props) => {
 console.log(editId)
     const { currentUsername, routinesList, setRoutines, token} = props
 
-//Filtering Routines by Logged in Username
+//Filtering Routines by Logged in Username THIS WORKS
     const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
     console.log('routinesbyUserName: ', routinesbyUsername);   
 
 
+
     //THIS IS BREAKING THE PAGE below
 //     setUsernameRoutineList(routinesbyUsername)
-//    console.log("Whats the UsernameRoutineList on State", usernameRoutineList)
-    
+//WORKING ON THIS NOV 6TH
+// const refreshList = () => {
+//     routinesList.filter(routine => currentUsername === routine.creatorName);
+// }
+// setUsernameRoutineList(routinesbyUsername)
+
+// console.log('reFreshList: ', usernameRoutineList);  
+//Working on this ends
+
 
     const handleSubmit = async (event) => {
             console.log("What is the new Routine name and goal", name, goal)
@@ -46,10 +54,12 @@ console.log(editId)
                 console.log("What is the response from the routines form", response)
                 const data = await response.json()
                 console.log("What is the dataJSON from routines form", data)
-    
+               
                 const newRoutinesList = [...routinesList, data]
                 console.log("What is the New Routines List", newRoutinesList)
+               
                 setRoutines(newRoutinesList)
+
     
             } catch (error) {
                 console.error(error)
@@ -118,7 +128,9 @@ console.log(editId)
         </form>
 
         <h2>Hello {currentUsername}</h2> 
+{/* New */}
 
+{/* New                 */}
       { console.log("What is the list of ROUTINES by Username inside of return", routinesbyUsername)}
         { routinesbyUsername && routinesbyUsername.length > 0 &&  routinesbyUsername.map((userRoutine) => 
                 <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}}>
@@ -138,7 +150,7 @@ console.log(editId)
 {/* Working on this for EDITING a ROUTINE */}
 <form className='routineEditForm' style={{border: "1px solid black", width: "400px", 
             backgroundColor: "yellow",}}
-            // onSubmit?
+            onSubmit={handleEditSubmit}
             >
             <h2>Edit Routine</h2>
             <input type="text" placeholder="name" value={ editName } 

@@ -4,7 +4,7 @@ import './Header.css';
 //     Forms
 //    from './Sign';
 // import NewAccount from './NewAccount'
-import {getUser} from '../api'
+import { getUser } from '../api'
 
 
 const BASE = 'http://localhost:4000/api'
@@ -47,8 +47,10 @@ const Header = (props) => {
           if (data.token) {
           await setCurrentUsername(data.user.username)
           }
-        //   const trygettinguser = await getUser(token)
-        //   console.log("Do we see user info", trygettinguser)
+//Take 2 on Getting User          
+          const trygettinguser = await getUser(data.token)
+          console.log("Do we see user info ID", trygettinguser)
+//End Getting User          
           console.log("What is LOG-in token after setToken func", token)
           if (data.error) {
             setErrorMessage(data.message)

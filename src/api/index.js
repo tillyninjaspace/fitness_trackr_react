@@ -28,21 +28,24 @@ export async function getActivities() {
 }
 
 
-//Nov 4, 2020 -- Working on this
+//Nov 4, 2020 -- Working on this Nov 6 working on this again -- Comes back as object on this side only
 export async function getUser(token) {
   try { 
     const data = await fetch(`${ BASE }/users/me`, {
     headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'Authorization': 'Bearer' + " " + token
   },
 })
   console.log(data)
   const response = await data.json()
   console.log("What is response under API getUser", response)
-    // if (!token) {
-    //   return
-    // }
+    if (!token) {
+      return
+    } else {
+    return response
+    }
+    //HAHAHA, ^^^ I forgot to return response
     // if (response.username) {
     //   setCurrentUser(response.username)
     // }
@@ -51,6 +54,38 @@ export async function getUser(token) {
       throw error;
   }
 }
+
+
+// FORMAT TO follow from Routines that returned a correct object format
+// try {
+//   const response = await fetch('http://localhost:4000/api/routines', {
+//       method: "POST",
+//       headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': `Bearer ${token}`
+//           },
+//       body: JSON.stringify({
+//       name: `${name}`,
+//       goal: `${goal}`,
+//       isPublic: `${isPublic}`
+//       })
+//   })
+//   console.log("What is the response from the routines form", response)
+//   const data = await response.json()
+//   console.log("What is the dataJSON from routines form", data)
+ 
+//   const newRoutinesList = [...routinesList, data]
+//   console.log("What is the New Routines List", newRoutinesList)
+ 
+//   setRoutines(newRoutinesList)
+
+
+// } catch (error) {
+//   console.error(error)
+// }
+
+
+
 
 //Old Jquery Example from my Stranger's things for reference
 // const signUp = async (username, password) => {
