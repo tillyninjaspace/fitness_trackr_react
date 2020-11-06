@@ -8,6 +8,7 @@ header {
     flex-wrap: wrap;
     justify-content: space-between;
     border-radius: 5px;
+    padding: 10px;
 }
 
 .mainHeader {
@@ -37,4 +38,8 @@ input {
     padding: 7px;
     color: white;
     border-radius: 5px;
+}
+
+.formTitle {
+    color: white;
 }

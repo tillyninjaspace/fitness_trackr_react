@@ -23,7 +23,7 @@ const Header = (props) => {
         const [password, setPassword] = useState('')
         
         const handleSubmit = async (event) => {
-          console.log("What is LOG-IN username and password input",username, password)
+          console.log("What is LOG-IN username and password input", username, password)
           event.preventDefault();
          try {    
           const response = await fetch('http://localhost:4000/api/users/login', {
@@ -40,16 +40,15 @@ const Header = (props) => {
           const data = await response.json()
           console.log("What is LOG-IN data", data)
           console.log("What is LOG-IN token?", data.token)
-//GETTING USER IS NOT WORKING          
+//GETTING USER IS NOT WORKING --- may not need it         
           await setToken(data.token)
           await setCurrentUsername(data.user.username)
         //   const trygettinguser = await getUser(token)
         //   console.log("Do we see user info", trygettinguser)
           console.log("What is LOG-in token after setToken func", token)
-          //having error here, anyusername and password can log in
 
         } catch(error) {
-        console.error(error)
+          console.error(error)
         }
 
 //trying to getUser after is an idea
@@ -59,7 +58,6 @@ const Header = (props) => {
       //END TRY CATCH
       console.log("What is token outside the function", token)
       console.log("What is the USERNAME outside the function", currentUsername)
-      //still working on the handleSubmit button above
           return (
               <div className='forms'>
                   <h2 className="formTitle">Log In</h2>
@@ -117,18 +115,15 @@ const Header = (props) => {
           console.log(response.status)
           const data = await response.json()
           console.log("What is NEW ACCOUNT data", data)
-          //having error here, no one can create a new account. Saying everyone exists already.
-      
           console.log("What is NEW ACCOUNT token?", data.token)
           
       } catch(error) {
         console.error(error)
       }
       
-      }
+    }
       //END TRY CATCH
       
-      //still working on the handleSubmit button above
           return (
               <div className='forms'>
                   <h2 className="formTitle">New Account</h2>
@@ -162,7 +157,7 @@ const Header = (props) => {
           )
       }
         
-
+console.log("What is currentUsername result", currentUsername)
     
     return (
         <header>

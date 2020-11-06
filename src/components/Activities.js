@@ -13,8 +13,6 @@ const Activities = (props) => {
     const [activityid, setActivityid] = useState('')
     const {token} = props
 
-
-    //This is BREAKING!
     const handleSubmit = async (event) => {
         console.log("What is the new name and description", name, description)
         event.preventDefault()

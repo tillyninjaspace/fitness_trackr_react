@@ -7,9 +7,15 @@ const MyRoutines = (props) => {
     const [goal, setGoal] = useState('')
     const [isPublic, setIsPublic] = useState(true)
 
+// useState For Editing a Routine    
+    const [ editName, setEditName ] = ('')
+    const [ editGoal, setEditGoal ] = ('')
+// useState for Editing ends
+
     const { currentUsername, routinesList, setRoutines, token} = props
 
-    const [routinesbyUsername] = routinesList.filter(routine => currentUsername === routine.creatorName);
+//Filtering Routines by Logged in Username
+    const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
     console.log('routinesbyUserName: ', routinesbyUsername);   
 
     const handleSubmit = async (event) => {
@@ -71,14 +77,45 @@ const MyRoutines = (props) => {
         </form>
 
         <h2>Hello {currentUsername}</h2> 
-       
+
       { console.log("What is the list of ROUTINES by Username inside of return", routinesbyUsername)}
         { routinesbyUsername && routinesbyUsername.length > 0 &&  routinesbyUsername.map((userRoutine) => 
-                <div key={userRoutine.id}>
-                {userRoutine.name}
+                <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}}>
+                <h4>{userRoutine.name}</h4>
+                <p>Goal:{userRoutine.goal}</p>
+                <p>Creator:{userRoutine.creatorName}</p>
+                <button className="edit">Edit</button>
+                <button className="delete">Delete</button>
                 </div>
             )
         }
+
+{/* Working on this for EDITING a ROUTINE */}
+<form className='routineEditForm' style={{border: "1px solid black", width: "400px", 
+            backgroundColor: "yellow",}}
+            // onSubmit?
+            >
+            <h2>Edit Routine</h2>
+            <input type="text" placeholder="name" value={ editName } 
+                onChange={(event) => {
+                    setEditName(event.target.value)
+                }}
+                />
+            <input type="text" placeholder="goal" value={ editGoal }
+                onChange={(event) => {
+                    setEditGoal(event.target.value)
+                }}
+                />
+            <label>Public? 
+            <select>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            </select>
+            </label>   
+            <button style={{padding: "5px", color: "purple", 
+                 border: "1 solid black"}}>
+                Edit Routine</button>
+        </form>
 
         </div>
     )
