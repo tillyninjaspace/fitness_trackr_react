@@ -15,6 +15,8 @@ const BASE = 'http://localhost:4000/api'
 const Header = (props) => {
     console.log("Header props", props)
     
+    const [loggingIn, setLoggingIn] = useState(true)
+    const [errorMessage, setErrorMessage] = useState('')
     const {token, setToken, setCurrentUsername, currentUsername} = props
 
 //LOGIN
@@ -42,10 +44,17 @@ const Header = (props) => {
           console.log("What is LOG-IN token?", data.token)
 //GETTING USER IS NOT WORKING --- may not need it         
           await setToken(data.token)
+          if (data.token) {
           await setCurrentUsername(data.user.username)
+          }
         //   const trygettinguser = await getUser(token)
         //   console.log("Do we see user info", trygettinguser)
           console.log("What is LOG-in token after setToken func", token)
+          if (data.error) {
+            setErrorMessage(data.message)
+        } else {
+            setErrorMessage('')
+        }
 
         } catch(error) {
           console.error(error)
@@ -116,13 +125,19 @@ const Header = (props) => {
           const data = await response.json()
           console.log("What is NEW ACCOUNT data", data)
           console.log("What is NEW ACCOUNT token?", data.token)
+          if (data.error) {
+              setErrorMessage(data.message)
+          }  else {
+            setErrorMessage('')
+          }
           
       } catch(error) {
         console.error(error)
       }
       
     }
-      //END TRY CATCH
+
+ console.log("error message", errorMessage)
       
           return (
               <div className='forms'>
@@ -163,8 +178,17 @@ console.log("What is currentUsername result", currentUsername)
         <header>
         <h1 className='mainHeader'>Fitness Tracker</h1>
         {/* <Forms /> */}
-        <LogInForm />
+        <section className="toggleSignIn">
+        <button className="toggleButton"
+        onClick={() => setLoggingIn(!loggingIn)}>{loggingIn ? 'New User? Create Account' : 'Already have an Account? Log In'}</button>
+        { errorMessage? <p className="errorMessage">{errorMessage}</p> : '' }
+
+     { 
+        loggingIn ? <LogInForm />
+        :
         <NewAccount />
+     }
+        </section>
         </header>
     )
 }

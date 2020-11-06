@@ -6,6 +6,7 @@ const MyRoutines = (props) => {
     const [name, setName] = useState('')
     const [goal, setGoal] = useState('')
     const [isPublic, setIsPublic] = useState(true)
+    const [ usernameRoutineList, setUsernameRoutineList] = useState([])
 
 // useState For Editing a Routine    
     const [ editName, setEditName ] = useState('')
@@ -18,6 +19,12 @@ console.log(editId)
 //Filtering Routines by Logged in Username
     const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
     console.log('routinesbyUserName: ', routinesbyUsername);   
+
+
+    //THIS IS BREAKING THE PAGE below
+//     setUsernameRoutineList(routinesbyUsername)
+//    console.log("Whats the UsernameRoutineList on State", usernameRoutineList)
+    
 
     const handleSubmit = async (event) => {
             console.log("What is the new Routine name and goal", name, goal)
@@ -48,6 +55,39 @@ console.log(editId)
                 console.error(error)
             }
     }
+
+
+    const handleEditSubmit = async (event) => {
+        console.log("What is the updated Routine name and goal", editName, editGoal)
+        event.preventDefault()
+
+        try {
+            const response = await fetch(`http://localhost:4000/api/routines/${editId}`, {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                    },
+                body: JSON.stringify({
+                name: `${editName}`,
+                goal: `${editGoal}`,
+                isPublic: `${isPublic}`
+                })
+            })
+            console.log("What is the response from the UPDATED routines form", response)
+            const data = await response.json()
+            console.log("What is the dataJSON from UPDATED routines form", data)
+
+            //BElOW may not work Because I am not pushing any new items
+            // const newRoutinesList = [...routinesList, data]
+            // console.log("What is the New Routines List", newRoutinesList)
+            // setRoutines(newRoutinesList)
+
+        } catch (error) {
+            console.error(error)
+        }
+}
+
      
     
 

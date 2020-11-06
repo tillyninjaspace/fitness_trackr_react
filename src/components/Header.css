@@ -43,3 +43,13 @@ input {
 .formTitle {
     color: white;
 }
+
+.toggleButton {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.errorMessage {
+    color: red;
+    background-color: white;
+}

@@ -9,6 +9,7 @@ const Activities = (props) => {
     console.log("what are the props under Activities ", props)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     //temporary id for testing for render
     const [activityid, setActivityid] = useState('')
     const {token} = props
@@ -32,6 +33,12 @@ const Activities = (props) => {
             console.log("What is the response from the activities form", response)
             const data = await response.json()
             console.log("What is the dataJSON from activities form", data)
+                if (data.error) {
+                    setErrorMessage('Sorry, your ACTIVITY was not added due to duplicate activity')
+                return
+                } else {
+                    setErrorMessage('')
+                }
 
             const newActivitiesList = [...activitiesList, data]
             console.log("What is the New Activities List", newActivitiesList)
@@ -61,6 +68,9 @@ const Activities = (props) => {
             // }}
         >
             <h2>Create a New Activity</h2>
+            { errorMessage ? 
+            <p style={{color: "red", backgroundColor: "white"}}>{errorMessage} </p> : ''
+            }
             {/* //temporary id to see if it's going to render */}
             {/* <input type="number" placeholder="id"
                 value={activityid}
