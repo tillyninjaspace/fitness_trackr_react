@@ -27,9 +27,10 @@ const App = () => {
     const [routinesList, setRoutines] = useState([])
     const [activitiesList, setActivities] = useState([])
     const [loading, setLoading] = useState(false)
-    const [token, setToken] =useState('')
+    const [token, setToken] = useState('')
 // Nov 5 working on currentUsername morning    
     const [currentUsername, setCurrentUsername] = useState('')
+    const [ usernameRoutineList, setUsernameRoutineList] = useState([])
 
     useEffect(() => {
          //need to review
@@ -58,16 +59,20 @@ const App = () => {
 
     }, []);
 
-    // useEffect(() => {
-    //     console.log("looking for activities changes")
-     
+    
+//Nov 7, Testing This --- PERSISTED!
+    const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
+    console.log("INITIAL LIST", initialList)
 
+    useEffect(() => {
+    setUsernameRoutineList(initialList)
+    },[])
 
-    // }, [activitiesList])
 
 
   console.log("What is the token inside of Main Index.JS?", token)
   console.log("What is the ActivitiesList after update", activitiesList)
+  console.log("What is the routine LIST by LOGGED in USER after NEW ROUTINE", usernameRoutineList)
 
     return (
        
@@ -82,7 +87,8 @@ const App = () => {
                 <Switch>
 
                 <Route path="/my-routines"><MyRoutines currentUsername={currentUsername}
-                    token={token} routinesList={routinesList} setRoutines={setRoutines} /> 
+                    token={token} routinesList={routinesList} setRoutines={setRoutines}
+                    usernameRoutineList={usernameRoutineList} setUsernameRoutineList={setUsernameRoutineList}  /> 
                 </Route>      
                 <Route exact path="/routines">
                 <Routines routinesList={routinesList}/> </Route> 

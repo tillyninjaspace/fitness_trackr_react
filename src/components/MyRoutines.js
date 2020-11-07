@@ -8,7 +8,7 @@ const MyRoutines = (props) => {
     const [name, setName] = useState('')
     const [goal, setGoal] = useState('')
     const [isPublic, setIsPublic] = useState(true)
-    const [ usernameRoutineList, setUsernameRoutineList] = useState([])
+    // const [ usernameRoutineList, setUsernameRoutineList] = useState([])
     const [changeRoutineList, setChangeRoutineList] = useState(false)
 
 // useState For Editing a Routine    
@@ -17,18 +17,24 @@ const MyRoutines = (props) => {
     const [ editId, setEditId ] = useState(1)
 // useState for Editing ends
 console.log(editId)
-    const { currentUsername, routinesList, setRoutines, token} = props
+    const { currentUsername, routinesList, setRoutines, token, usernameRoutineList, setUsernameRoutineList} = props
 
 //Filtering Routines by Logged in Username THIS WORKS
     // const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
     // console.log('routinesbyUserName: ', routinesbyUsername); 
 
-const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
 
-useEffect(() => {
-    setUsernameRoutineList(initialList)
-},[])
+    //GOLDEN  -- moved to main index 
+// const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
 
+// useEffect(() => {
+//     if (!changeRoutineList) {
+//     setUsernameRoutineList(initialList)
+//     }
+// },[])
+//GOLDEN ends
+
+//Trying this out on Nov. 7 to get newest routine to persist
 // useEffect(()=> {
 //     setUsernameRoutineList(initialList)
 // },[changeRoutineList])
@@ -60,13 +66,16 @@ console.log('usernameRoutinesList: ', usernameRoutineList)
                 const newUserRoutinesList = [...usernameRoutineList]
 
                 console.log("What is the New Routines List", newRoutinesList)
-                newRoutinesList.unshift(data)
-                setRoutines(newRoutinesList)
+                
 
                 newUserRoutinesList.unshift(data)
                 setUsernameRoutineList(newUserRoutinesList)
 
-
+                newRoutinesList.unshift(data)
+                setRoutines(newRoutinesList)
+     //Trying this again
+     setChangeRoutineList(true)
+     
                 setName('')
                 setGoal('')
     
