@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './MyRoutines.css'
 
 import { deleteRoutine } from '../api';
@@ -9,6 +9,7 @@ const MyRoutines = (props) => {
     const [goal, setGoal] = useState('')
     const [isPublic, setIsPublic] = useState(true)
     const [ usernameRoutineList, setUsernameRoutineList] = useState([])
+    const [changeRoutineList, setChangeRoutineList] = useState(false)
 
 // useState For Editing a Routine    
     const [ editName, setEditName ] = useState('')
@@ -19,22 +20,20 @@ console.log(editId)
     const { currentUsername, routinesList, setRoutines, token} = props
 
 //Filtering Routines by Logged in Username THIS WORKS
-    const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
-    console.log('routinesbyUserName: ', routinesbyUsername);   
+    // const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
+    // console.log('routinesbyUserName: ', routinesbyUsername); 
 
+const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
 
+useEffect(() => {
+    setUsernameRoutineList(initialList)
+},[])
 
-    //THIS IS BREAKING THE PAGE below
-//     setUsernameRoutineList(routinesbyUsername)
-//WORKING ON THIS NOV 6TH
-// const refreshList = () => {
-//     routinesList.filter(routine => currentUsername === routine.creatorName);
-// }
-// setUsernameRoutineList(routinesbyUsername)
+// useEffect(()=> {
+//     setUsernameRoutineList(initialList)
+// },[changeRoutineList])
 
-// console.log('reFreshList: ', usernameRoutineList);  
-//Working on this ends
-
+console.log('usernameRoutinesList: ', usernameRoutineList) 
 
     const handleSubmit = async (event) => {
             console.log("What is the new Routine name and goal", name, goal)
@@ -58,9 +57,16 @@ console.log(editId)
                 console.log("What is the dataJSON from routines form", data)
                
                 const newRoutinesList = [...routinesList]
+                const newUserRoutinesList = [...usernameRoutineList]
+
                 console.log("What is the New Routines List", newRoutinesList)
                 newRoutinesList.unshift(data)
                 setRoutines(newRoutinesList)
+
+                newUserRoutinesList.unshift(data)
+                setUsernameRoutineList(newUserRoutinesList)
+
+
                 setName('')
                 setGoal('')
     
@@ -134,8 +140,10 @@ console.log(editId)
 {/* New */}
 
 {/* New                 */}
-      { console.log("What is the list of ROUTINES by Username inside of return", routinesbyUsername)}
-        { routinesbyUsername && routinesbyUsername.length > 0 &&  routinesbyUsername.map((userRoutine) => 
+
+{/* //TESING something */}
+      { console.log("What is the list of ROUTINES by Username inside of return", usernameRoutineList)}
+        { usernameRoutineList && usernameRoutineList.length > 0 &&  usernameRoutineList.map((userRoutine) => 
                 <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}} className="routineCard">
                 <h4>{userRoutine.name}</h4>
                 <p>Goal:{userRoutine.goal}</p>
@@ -150,12 +158,18 @@ console.log(editId)
                     console.log("delete button")
 //This works now and renders the disappearance
                     const newList = [...routinesList]
+                    const newUserList = [...usernameRoutineList]
+
                     const index = newList.findIndex(a => a.id === userRoutine.id);
                     console.log("WhaT is this index", index)
                     if (index === -1) return;
                     newList.splice(index, 1);
                     setRoutines(newList)
 
+                    const index2 = newUserList.findIndex(a => a.id === userRoutine.id);
+                    if (index2 === -1) return;
+                    newUserList.splice(index2, 1);
+                    setUsernameRoutineList(newUserList)
                    
                     deleteRoutine(userRoutine.id, token)
                 }}>Delete</button>
