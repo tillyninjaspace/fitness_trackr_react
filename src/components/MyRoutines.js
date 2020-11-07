@@ -82,7 +82,7 @@ console.log('usernameRoutinesList: ', usernameRoutineList)
                 newRoutinesList.unshift(data)
                 setRoutines(newRoutinesList)
      //Trying this again
-     setChangeRoutineList(true)
+    //  setChangeRoutineList(true)
      
                 setName('')
                 setGoal('')
@@ -113,8 +113,20 @@ console.log('usernameRoutinesList: ', usernameRoutineList)
             console.log("What is the response from the UPDATED routines form", response)
             const data = await response.json()
             console.log("What is the dataJSON from UPDATED routines form", data)
-//Trying Splice
-   
+//Trying Splice -- Worked for updates on both sides
+            const newList = [...routinesList]
+            const newUserRoutinesList = [...usernameRoutineList]
+
+            const index = newList.findIndex(a => a.id === editId);
+            console.log("WhaT is this UPDATE index", index)
+            if (index === -1) return;
+            newList.splice(index, 1, data);
+            setRoutines(newList)    
+
+            const index2 = newUserRoutinesList.findIndex(a => a.id === editId);
+            console.log("WhaT is this UPDATE index", index2)
+            newUserRoutinesList.splice(index2, 1, data);
+            setUsernameRoutineList(newUserRoutinesList)  
 //End Splice
 
             //BElOW may not work Because I am not pushing any new items

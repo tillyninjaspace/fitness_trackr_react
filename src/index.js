@@ -60,7 +60,7 @@ const App = () => {
     }, []);
 
     
-//Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show!
+//Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show! Update, adeed currentUsername to show old and new now
     const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
     console.log("INITIAL LIST", initialList)
 
