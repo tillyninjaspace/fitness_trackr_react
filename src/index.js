@@ -60,17 +60,18 @@ const App = () => {
     }, []);
 
     
-//Nov 7, Testing This --- PERSISTED!
+//Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show!
     const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
     console.log("INITIAL LIST", initialList)
 
     useEffect(() => {
     setUsernameRoutineList(initialList)
-    },[])
+    },[currentUsername])
 
 
 
   console.log("What is the token inside of Main Index.JS?", token)
+  console.log("What is the current USERNAME in Main Index", currentUsername)
   console.log("What is the ActivitiesList after update", activitiesList)
   console.log("What is the routine LIST by LOGGED in USER after NEW ROUTINE", usernameRoutineList)
 

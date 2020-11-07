@@ -28,11 +28,19 @@ console.log(editId)
 // const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
 
 // useEffect(() => {
-//     if (!changeRoutineList) {
+//     // if (!changeRoutineList) {
 //     setUsernameRoutineList(initialList)
-//     }
+//     // }
 // },[])
-//GOLDEN ends
+// GOLDEN ends
+
+// const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
+
+// useEffect(() => {
+//     // if (!changeRoutineList) {
+//     setUsernameRoutineList(initialList)
+//     // }
+// },[])
 
 //Trying this out on Nov. 7 to get newest routine to persist
 // useEffect(()=> {
@@ -105,6 +113,9 @@ console.log('usernameRoutinesList: ', usernameRoutineList)
             console.log("What is the response from the UPDATED routines form", response)
             const data = await response.json()
             console.log("What is the dataJSON from UPDATED routines form", data)
+//Trying Splice
+   
+//End Splice
 
             //BElOW may not work Because I am not pushing any new items
             // const newRoutinesList = [...routinesList, data]
@@ -152,7 +163,10 @@ console.log('usernameRoutinesList: ', usernameRoutineList)
 
 {/* //TESING something */}
       { console.log("What is the list of ROUTINES by Username inside of return", usernameRoutineList)}
-        { usernameRoutineList && usernameRoutineList.length > 0 &&  usernameRoutineList.map((userRoutine) => 
+    
+        { 
+        usernameRoutineList && usernameRoutineList.length > 0 &&  
+        usernameRoutineList.map((userRoutine) => 
                 <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}} className="routineCard">
                 <h4>{userRoutine.name}</h4>
                 <p>Goal:{userRoutine.goal}</p>
