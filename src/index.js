@@ -62,7 +62,7 @@ const App = () => {
     
 //Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show! Update, adeed currentUsername to show old and new now
     const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
-    console.log("INITIAL LIST", initialList)
+    // console.log("INITIAL LIST", initialList)
 
     useEffect(() => {
     setUsernameRoutineList(initialList)
@@ -81,7 +81,10 @@ const App = () => {
                 <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/routines" activeClassName="current">Routines</NavLink>
-                <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
+ {/* Nov 8, show MyRoutines only if token                */}
+                { token ? <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
+                : '' }
+{/* End MyRoutines conditional                 */}
                 <NavLink to="/activities" activeClassName="current">Activities</NavLink>
 
 

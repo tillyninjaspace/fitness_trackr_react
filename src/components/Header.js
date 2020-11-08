@@ -42,7 +42,7 @@ const Header = (props) => {
           const data = await response.json()
           console.log("What is LOG-IN data", data)
           console.log("What is LOG-IN token?", data.token)
-//GETTING USER IS NOT WORKING --- may not need it         
+       
           await setToken(data.token)
           if (data.token) {
           await setCurrentUsername(data.user.username)
@@ -53,7 +53,7 @@ const Header = (props) => {
 //End Getting User          
           console.log("What is LOG-in token after setToken func", token)
           if (data.error) {
-            setErrorMessage(data.message) || setErrorMessage(data.error + '. No username found.')
+            setErrorMessage(data.message) || setErrorMessage(data.error + '. No matching Username and Password found.')
         } else {
             setErrorMessage('')
         }
@@ -61,10 +61,6 @@ const Header = (props) => {
         } catch(error) {
           console.error(error)
         }
-
-//trying to getUser after is an idea
-
-      
       }
       //END TRY CATCH
       console.log("What is token outside the function", token)
@@ -127,11 +123,29 @@ const Header = (props) => {
           const data = await response.json()
           console.log("What is NEW ACCOUNT data", data)
           console.log("What is NEW ACCOUNT token?", data.token)
+
+          console.log("WHAT is the data.error under NEW", data.error)
+          console.log("Data ERROR MESSAGE?", data.message)
           if (data.error) {
-              setErrorMessage(data.message)
-          }  else {
+            setErrorMessage(data.message)
+        } else {
             setErrorMessage('')
-          }
+        }
+//Above I eliminated this:  || setErrorMessage(data.error + '. Test Error.')
+// Finalizing Account Log-in getUser does not return token only takes token
+                     
+        const newUser = await getUser(data.token)
+        console.log("Do we see NEW User info ID", newUser)
+        console.log("newUser token and newUser.username", newUser.token, newUser.username)
+        
+        if (data.token && newUser) {
+        await setToken(data.token)    
+        await setCurrentUsername(newUser.username)
+        }
+
+
+//Ending
+         
           
       } catch(error) {
         console.error(error)
@@ -139,7 +153,7 @@ const Header = (props) => {
       
     }
 
- console.log("error message", errorMessage)
+ console.log("Any error message TEST?", errorMessage)
       
           return (
               <div className='forms'>
@@ -181,15 +195,30 @@ console.log("What is currentUsername result", currentUsername)
         <h1 className='mainHeader'>Fitness Tracker</h1>
         {/* <Forms /> */}
         <section className="toggleSignIn">
+     {
+         token ? 
+       
+        <button className="signOut"
+        onClick={() => {setToken('') 
+                       setCurrentUsername('')}}>Sign Out</button>
+            :
         <button className="toggleButton"
         onClick={() => setLoggingIn(!loggingIn)}>{loggingIn ? 'New User? Create Account' : 'Already have an Account? Log In'}</button>
+        
+     }
+
+
         { errorMessage? <p className="errorMessage">{errorMessage}</p> : '' }
 
+
+    <div className="signInForms" style={{display: token? "none" : "block"}}>
      { 
         loggingIn ? <LogInForm />
         :
         <NewAccount />
      }
+    </div>
+        
         </section>
         </header>
     )

@@ -14,11 +14,11 @@ const NewActivity = (props) => {
     const [ duration, setDuration] = useState(0)
 
     const {activitiesList, routineIdtoAddActivity, token} = props
-    console.log("What are the props under New Activity Form", props)
+    // console.log("What are the props under New Activity Form", props)
 
     const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("What is NEW Activity values", activityId, count, duration, routineIdtoAddActivity)
+    console.log("What is NEW Activity values for the FORM", "ActivityID:", activityId, "Count:", count, "Duration:", duration, "RoutineID:",routineIdtoAddActivity)
     addActivity(routineIdtoAddActivity, token, activityId, count, duration)
     setCount(0)
     setDuration(0)
@@ -30,7 +30,7 @@ const NewActivity = (props) => {
     const id = event.target.value;
     const activity = activitiesList.find(activity => activity.id == id);
     console.log("What is the SELECTED activity", activity)
-    setActivityId(activity);
+    setActivityId(activity.id);
   }
 
 
@@ -38,18 +38,20 @@ const NewActivity = (props) => {
     return (
         <div className='activityForm'>
             <h4 className="activityFormTitle">Add an Activity</h4>
-            <form onSubmit={handleSubmit}
+            <form 
+            // onSubmit={handleSubmit}
 
-            // onSubmit={(event) => {event.preventDefault()
-            //     console.log("what is the SELECTED ACT count/duration", activityId, count, duration)
-            // }}
+            onSubmit={(event) => {event.preventDefault()
+                console.log("TESTING MODE What are the form values collected?", "Routine ID:", routineIdtoAddActivity,
+                "Activity ID:", activityId,"Count:", count, "Duration:", duration)
+            }}
             
             >
 
-            <select onChange={ handleSelectChange }>{
+            <select onChange={ handleSelectChange } className="option" >{
                 activitiesList.map(activity => (
                   <option key={ activity.id } value={ activity.id }
-                  className="option"
+                  
                   >
                     { activity.name}
                   </option>
@@ -60,6 +62,7 @@ const NewActivity = (props) => {
             <label>Count:</label>    
             <input className="numberInput"
                 type="number" 
+                min="0"
                 // placeholder="Count" 
                 value={ count }
                 name="count"
@@ -70,6 +73,7 @@ const NewActivity = (props) => {
             <label>Duration:</label>   
             <input className="numberInput"
                 type="number" 
+                min="0"
                 // placeholder="Duration" 
                 value={ duration }
                 name="duration"

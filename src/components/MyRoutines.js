@@ -23,6 +23,7 @@ const MyRoutines = (props) => {
     const [ editName, setEditName ] = useState('')
     const [ editGoal, setEditGoal ] = useState('')
     const [ editId, setEditId ] = useState(1)
+    const [ isEditing, setIsEditing] = useState(false)
 // useState for Editing ends
 console.log(editId)
 
@@ -61,8 +62,8 @@ console.log("What is the ROUTINE ID TO ADD ACT", routineIdtoAddActivity)
 // },[])
 
 
-console.log('usernameRoutinesList: ', usernameRoutineList) 
-console.log("activitiesList in My Routines to pass to Forms", activitiesList)
+// console.log('usernameRoutinesList: ', usernameRoutineList) 
+// console.log("activitiesList in My Routines to pass to Forms", activitiesList)
 
     const handleSubmit = async (event) => {
             console.log("What is the new Routine name and goal", name, goal)
@@ -148,71 +149,49 @@ console.log("activitiesList in My Routines to pass to Forms", activitiesList)
         }
 }
 
-        const handleNewActivitySubmit = async (event) => {
-            event.preventDefault()
-            console.log("What is NEW Activity values", activityId, count, duration)
-          
-
-            setCount(0)
-            setDuration(0)
-        //TRY CATCH moved to API 
-        }
-
-    const handleSelectChange = (event) => {
-        const id = event.target.value;
-        const activity = activitiesList.find(activity => activity.id == id);
-        console.log("What is the SELECTED activity", activity)
-        setActivityId(activity);
-  }
-
      
-    
+
 
     return (
         <>
         <div className="myRoutinesSection">
-        <h1>My Routines</h1>
+                <h1>My Routines</h1>
 
-        <form className='myRoutineForm'
-            onSubmit={handleSubmit}>
-            <h2>Create a New Routine</h2>
-            <input type="text" placeholder="name" value={ name } 
-                onChange={(event) => {
+                <form className='myRoutineForm'
+                    onSubmit={handleSubmit}>
+                <h2>Create a New Routine</h2>
+                <label>Name</label>
+                <input type="text" placeholder="name" value={ name } 
+                    onChange={(event) => {
                     setName(event.target.value)
-                }}
-                />
-            <input type="text" placeholder="goal" value={ goal }
-                onChange={(event) => {
-                    setGoal(event.target.value)
-                }}
-                />
-{/* DOCS didn't mention having isPublic as a requirement so come back if have time                 */}
-            {/* <label>Public? 
-            <select>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-            </select>
-            </label>    */}
-            <button>Add Routine</button>
-        </form>
+                    }}/>
+                <label>Goal</label>    
+                <input type="text" placeholder="goal" value={ goal }
+                    onChange={(event) => {
+                    setGoal(event.target.value)}}/>
 
-        <h2>Hello {currentUsername}</h2> 
+                <button>Add Routine</button>
+                </form>
 
-{/* //TESING something */}
-      { console.log("What is the list of ROUTINES by Username inside of return", usernameRoutineList)}
-        <div className="routineMain">
-        { 
-        usernameRoutineList && usernameRoutineList.length > 0 &&  
-        usernameRoutineList.map((userRoutine) => 
+                <h2>Hi {currentUsername}</h2> 
+
+
+            <div className="routineMain">
+            
+            {   
+                usernameRoutineList && usernameRoutineList.length > 0 &&  
+                usernameRoutineList.map((userRoutine) => 
+
                 <div key={userRoutine.id} style={{border: "1px solid black", width: "200px"}} className="routineCard">
+
                 <section>
                 <h3>{userRoutine.name}</h3>
                 <p>Goal: {userRoutine.goal}</p>
                 <p>Creator: {userRoutine.creatorName}</p>
                 </section>
 {/* activitites  */}
-{ userRoutine.activities ? 
-                
+        { userRoutine.activities ? 
+                <>
                 <section className="actList">
                 <p>Activities:</p>
                     {userRoutine.activities.map((activity) => 
@@ -225,19 +204,22 @@ console.log("activitiesList in My Routines to pass to Forms", activitiesList)
                     )
                     }
                 </section>
+                </>
                 : ''
-            }     
+                    
+        }     
 {/* activities ends */}
 
+
                 <button className="edit" onClick={() => {
+                    setIsEditing(true)
                     setEditName(userRoutine.name)
                     setEditGoal(userRoutine.goal)
-                    setEditId(userRoutine.id)
-                }}>Edit</button>
+                    setEditId(userRoutine.id)}}>Edit</button>
+
                 <button className="delete" onClick={(event) => {
                     console.log("What is the this routine.id value", userRoutine.id)
                     console.log("delete button")
-//This works now and renders the disappearance
                     const newList = [...routinesList]
                     const newUserList = [...usernameRoutineList]
 
@@ -252,129 +234,73 @@ console.log("activitiesList in My Routines to pass to Forms", activitiesList)
                     newUserList.splice(index2, 1);
                     setUsernameRoutineList(newUserList)
                    
-                    deleteRoutine(userRoutine.id, token)
-                }}>Delete</button>
+                    deleteRoutine(userRoutine.id, token)}}>Delete</button>
 
 {/* NEW ACTIVITY FORM */}
+                <>
                 <button
-                onClick={(event) => {setRoutineIdtoAddActivity(userRoutine.id)}
-                }>
+                    onClick={(event) => {setRoutineIdtoAddActivity(userRoutine.id)}}>
                 <NewActivity activitiesList={activitiesList} routineIdtoAddActivity={routineIdtoAddActivity}
                     token={token}  />
-                    
-                    </button>
-              
-
-            {/* <div className='activityForm'>
-            <h4 className="activityFormTitle">Add an Activity</h4>
-            <form 
-                onSubmit={async (event) => {event.preventDefault()
-                console.log("what is the SELECTED ACT count/duration", activityId, count, duration)
-            
-            
-            try { 
-                const response = await fetch(`http://localhost:4000/api/routines/${routineId}/activities`, {
-                method: "POST",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`
-                  },
-                body: JSON.stringify({
-                  activityId: `${activityId}`,   
-                  name: `${count}`,
-                  goal: `${duration}`,
-                  })
-                })
-                console.log("What is the response from the ACTIIVITY form", response)
-                const data = await response.json()
-                console.log("What is the dataJSON from ACTIVITY FORM", data)
-              } catch (error) {
-              console.error(error)
-              }
-
-            }}
-            // onSubmit={handleNewActivitySubmit}
-            >
-
-            <select onChange={ handleSelectChange }>{
-                activitiesList.map(activity => (
-                  <option key={ activity.id } value={ activity.id }>
-                    { activity.name}
-                  </option>
-                ))
-              }</select>
-
-
-            <label>Count:</label>    
-            <input className="numberInput"
-                type="number" 
-                // placeholder="Count" 
-                value={ count }
-                name="count"
-                onChange={(event) => {
-                    setCount(event.target.value)
-                }}
-            />
-            <label>Duration:</label>   
-            <input className="numberInput"
-                type="number" 
-                // placeholder="Duration" 
-                value={ duration }
-                name="duration"
-                onChange={(event) => {
-                    setDuration(event.target.value)
-                }}
-            />
-             <button type="submit" className='submitButton'>Add the Activity</button>
-            </form>
-
-
-        </div>
- */}
-
-
-
-
+                </button>
+                </>
 {/* NEW ACTIVITY FORM ENDS */}
 
 
                 </div>
+                //Above is where the CARD Closes
             )
         }
         </div>
        
-{/* Main Card Ends       */}
+{/* Where the card border ends       */}
 
-{/* Working on this for EDITING a ROUTINE */}
-<form className='routineEditForm' style={{border: "1px solid black", width: "400px", 
-            backgroundColor: "yellow",}}
-            onSubmit={handleEditSubmit}
-            >
-            <h2>Edit Routine</h2>
-            <input type="text" placeholder="name" value={ editName } 
+{/* Edit ROUTINE FORM */}
+            <form className='routineEditForm' style={{border: "1px solid gray", 
+                display: isEditing? 'block' : 'none'}}
+                onSubmit={handleEditSubmit}>
+                <h2 className="nameHeading"><span>Edit Routine</span> 
+                <span className="close" onClick={() => setIsEditing(false)}>X CLOSE</span> 
+                </h2>
+                
+                <label >Name</label>
+                <input type="text" placeholder="name" value={ editName } 
                 onChange={(event) => {
-                    setEditName(event.target.value)
-                }}
-                />
-            <input type="text" placeholder="goal" value={ editGoal }
-                onChange={(event) => {
-                    setEditGoal(event.target.value)
-
-                }}
-                />
-            {/* <label>Public? 
-            <select>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-            </select>
-            </label>    */}
-            <button style={{padding: "5px", color: "purple", 
+                    setEditName(event.target.value)}}/>
+                <label>Goal</label>
+                <input type="textarea" placeholder="goal" value={ editGoal }
+                onChange={(event) => {setEditGoal(event.target.value)}}/>
+            
+                <button style={{padding: "5px", color: "purple", 
                  border: "1 solid black"}}>
                 Edit Routine</button>
-        </form>
+            </form>
+
+
+
     </div>
     </>
     )
 }
 
 export default MyRoutines;
+
+
+
+
+//extra
+{/* <label>Public? 
+            <select>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            </select>
+            </label>    */}
+
+
+            {/* DOCS didn't mention having isPublic as a requirement so come back if have time                 */}
+            {/* <label>Public? 
+            <select>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+            </select>
+            </label>    */}

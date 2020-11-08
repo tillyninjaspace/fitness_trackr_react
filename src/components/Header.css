@@ -44,7 +44,7 @@ input {
     color: white;
 }
 
-.toggleButton {
+.toggleButton,.signOut {
     padding: 5px;
     border-radius: 5px;
 }
@@ -56,10 +56,16 @@ input {
 
 .numberInput {
   border: 1px solid black;
-  width: 25px;
+  width: 50px;
 }
 
 .activityForm {
     border: 1px dotted black;
     width: 150px;
+    text-align: center;
+}
+
+.option {
+    width: 125px;
+    background-color: white;
 }

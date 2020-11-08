@@ -3,8 +3,7 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import Routines from './Routines'
 
-console.log("is this working for SINGLEUSER")
-//created this whole file on Nov 3
+// console.log("is this working for SINGLEUSER")
 // /users/:username/routines    
 //maybe put username in parameter
 export default (props) => {

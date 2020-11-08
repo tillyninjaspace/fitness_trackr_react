@@ -84,9 +84,12 @@ export async function addActivity(routineId, token, activityId, count, duration)
       'Authorization': `Bearer ${token}`
       },
     body: JSON.stringify({
-      activityId: activityId,
-      count: count,
-      duration: duration
+      // activityId: `${activityId}`,
+      // count: `${count}`,
+      // duration: `${duration}`
+          activityId,
+          count,
+          duration
       })
     })
     console.log("What is the response from the ACTIIVITY form", response)
