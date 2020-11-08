@@ -28,13 +28,13 @@ const MyRoutines = (props) => {
 console.log(editId)
 
 //for Adding an activity
-    const [ activityId, setActivityId] = useState(3)
-    const [ count, setCount] = useState(0)
-    const [ duration, setDuration] = useState(0)
+    // const [ activityId, setActivityId] = useState(3)
+    // const [ count, setCount] = useState(0)
+    // const [ duration, setDuration] = useState(0)
 
 // ----
     const [ routineIdtoAddActivity, setRoutineIdtoAddActivity ] = useState(1)
-console.log("What is the ROUTINE ID TO ADD ACT", routineIdtoAddActivity)
+    console.log("What is the ROUTINE ID TO ADD ACT", routineIdtoAddActivity)
 //Adding an activity ends
     
 
@@ -238,11 +238,12 @@ console.log("What is the ROUTINE ID TO ADD ACT", routineIdtoAddActivity)
 
 {/* NEW ACTIVITY FORM */}
                 <>
-                <button
+{/* Changing button to Div because of nesting red error               */}
+                <div
                     onClick={(event) => {setRoutineIdtoAddActivity(userRoutine.id)}}>
                 <NewActivity activitiesList={activitiesList} routineIdtoAddActivity={routineIdtoAddActivity}
                     token={token}  />
-                </button>
+                </div>
                 </>
 {/* NEW ACTIVITY FORM ENDS */}
 

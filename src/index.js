@@ -90,12 +90,17 @@ const App = () => {
 
                 <Switch>
 
+        { token ? 
                 <Route path="/my-routines"><MyRoutines currentUsername={currentUsername}
                     token={token} routinesList={routinesList} setRoutines={setRoutines}
                     usernameRoutineList={usernameRoutineList} setUsernameRoutineList={setUsernameRoutineList} 
                     activitiesList={activitiesList}
                     /> 
-                </Route>      
+                </Route>  
+            :
+            ''    
+        }
+
                 <Route exact path="/routines">
                 <Routines routinesList={routinesList}/> </Route> 
 
