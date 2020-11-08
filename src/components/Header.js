@@ -128,17 +128,21 @@ const Header = (props) => {
           console.log("Data ERROR MESSAGE?", data.message)
           if (data.error) {
             setErrorMessage(data.message)
+            return
         } else {
             setErrorMessage('')
         }
 //Above I eliminated this:  || setErrorMessage(data.error + '. Test Error.')
 // Finalizing Account Log-in getUser does not return token only takes token
-                     
+
+        // if (!data.error) {      
         const newUser = await getUser(data.token)
-        console.log("Do we see NEW User info ID", newUser)
+        // console.log("Do we see NEW User info ID", newUser)
+        // }
+
         console.log("newUser token and newUser.username", newUser.token, newUser.username)
         
-        if (data.token && newUser) {
+        if (!data.error && data.token && newUser) {
         await setToken(data.token)    
         await setCurrentUsername(newUser.username)
         }

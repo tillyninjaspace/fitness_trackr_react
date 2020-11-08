@@ -36,7 +36,7 @@ console.log(editId)
     const [ routineIdtoAddActivity, setRoutineIdtoAddActivity ] = useState(1)
     console.log("What is the ROUTINE ID TO ADD ACT", routineIdtoAddActivity)
 //Adding an activity ends
-    
+    const [routineError, setRoutineError] = useState('')
 
 //Filtering Routines by Logged in Username THIS WORKS
     // const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
@@ -85,6 +85,13 @@ console.log(editId)
                 console.log("What is the response from the routines form", response)
                 const data = await response.json()
                 console.log("What is the dataJSON from routines form", data)
+
+                if (data.error) {
+                    setRoutineError('Sorry, your Routine was not added due to duplicate routine')
+                return
+                } else {
+                    setRoutineError('')
+                }
                
                 const newRoutinesList = [...routinesList]
                 const newUserRoutinesList = [...usernameRoutineList]
@@ -160,6 +167,10 @@ console.log(editId)
                 <form className='myRoutineForm'
                     onSubmit={handleSubmit}>
                 <h2>Create a New Routine</h2>
+                
+            { routineError ? 
+            <p style={{color: "red", backgroundColor: "white"}}>{routineError} </p> : ''
+            }
                 <label>Name</label>
                 <input type="text" placeholder="name" value={ name } 
                     onChange={(event) => {

@@ -71,6 +71,7 @@ const Activities = (props) => {
             { errorMessage ? 
             <p style={{color: "red", backgroundColor: "white"}}>{errorMessage} </p> : ''
             }
+            
             {/* //temporary id to see if it's going to render */}
             {/* <input type="number" placeholder="id"
                 value={activityid}
