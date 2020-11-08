@@ -25,3 +25,15 @@
     color: red;
     padding: 5px;
 }
+
+.routineMain {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.routineCard {
+
+    width: 300px;
+}

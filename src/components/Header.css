@@ -21,7 +21,7 @@ header {
 }
 
 .forms {
-    border: 1px solid white;
+    border: 2px solid white;
     border-radius: 5px;
 }
 
@@ -52,4 +52,14 @@ input {
 .errorMessage {
     color: red;
     background-color: white;
+}
+
+.numberInput {
+  border: 1px solid black;
+  width: 25px;
+}
+
+.activityForm {
+    border: 1px dotted black;
+    width: 150px;
 }

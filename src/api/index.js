@@ -53,12 +53,8 @@ export async function getUser(token) {
 }
 
 
-//Working on Delete Functon now
+//This works as of Nov. 6th
 export async function deleteRoutine(routineId, token) {
-  // const handleSubmit = async (event) => {
-  //   console.log("What is the new Routine name and goal", name, goal)
-  //   event.preventDefault()
-
     try {
         const data = await fetch(`http://localhost:4000/api/routines/${routineId}`, {
             method: "DELETE",
@@ -76,6 +72,30 @@ export async function deleteRoutine(routineId, token) {
     }
 }
 
+
+//Working on thsi at the moment ERROR 
+//"syntax error at or near "["" On Nov. 7th
+export async function addActivity(routineId, token, activityId, count, duration) {
+  try { 
+    const response = await fetch(`http://localhost:4000/api/routines/${routineId}/activities`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+      },
+    body: JSON.stringify({
+      activityId: activityId,
+      count: count,
+      duration: duration
+      })
+    })
+    console.log("What is the response from the ACTIIVITY form", response)
+    const data = await response.json()
+    console.log("What is the dataJSON from ACTIVITY FORM", data)
+  } catch (error) {
+  console.error(error)
+  }
+}
 
 
 

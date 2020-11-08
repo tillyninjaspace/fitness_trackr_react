@@ -78,7 +78,7 @@ const App = () => {
     return (
        
             <div id="bigHoncho">
-                <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername}/>
+                <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/routines" activeClassName="current">Routines</NavLink>
                 <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
@@ -89,7 +89,9 @@ const App = () => {
 
                 <Route path="/my-routines"><MyRoutines currentUsername={currentUsername}
                     token={token} routinesList={routinesList} setRoutines={setRoutines}
-                    usernameRoutineList={usernameRoutineList} setUsernameRoutineList={setUsernameRoutineList}  /> 
+                    usernameRoutineList={usernameRoutineList} setUsernameRoutineList={setUsernameRoutineList} 
+                    activitiesList={activitiesList}
+                    /> 
                 </Route>      
                 <Route exact path="/routines">
                 <Routines routinesList={routinesList}/> </Route> 
