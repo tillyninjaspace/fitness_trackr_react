@@ -268,7 +268,7 @@ console.log(editId)
 {/* Where the card border ends       */}
 
 {/* Edit ROUTINE FORM */}
-            <form className='routineEditForm' style={{border: "1px solid gray", 
+            <form className='routineEditForm' style={{
                 display: isEditing? 'block' : 'none'}}
                 onSubmit={handleEditSubmit}>
                 <h2 className="nameHeading"><span>Edit Routine</span> 
@@ -283,7 +283,7 @@ console.log(editId)
                 <input type="textarea" placeholder="goal" value={ editGoal }
                 onChange={(event) => {setEditGoal(event.target.value)}}/>
             
-                <button style={{padding: "5px", color: "purple", 
+                <button style={{padding: "5px", 
                  border: "1 solid black"}}>
                 Edit Routine</button>
             </form>

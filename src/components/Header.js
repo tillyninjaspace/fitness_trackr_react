@@ -6,6 +6,13 @@ import './Header.css';
 // import NewAccount from './NewAccount'
 import { getUser } from '../api'
 
+import {
+    storeCurrentUser,
+    clearCurrentUser,
+    storeCurrentToken,
+    clearCurrentToken
+} from '../auth';
+  
 
 const BASE = 'http://localhost:4000/api'
 
@@ -47,6 +54,9 @@ const Header = (props) => {
           if (data.token) {
           await setCurrentUsername(data.user.username)
           }
+//LOCALSTORAGE Nov 8 
+          await storeCurrentUser(data.user.username)
+          await storeCurrentToken(data.token)
 //Take 2 on Getting User          
           const trygettinguser = await getUser(data.token)
           console.log("Do we see user info ID", trygettinguser)
@@ -139,7 +149,9 @@ const Header = (props) => {
         const newUser = await getUser(data.token)
         // console.log("Do we see NEW User info ID", newUser)
         // }
-
+// LOCALSTORAGE        
+        await storeCurrentUser(data.user.username)
+        await storeCurrentToken(data.token)
         console.log("newUser token and newUser.username", newUser.token, newUser.username)
         
         if (!data.error && data.token && newUser) {
@@ -204,7 +216,10 @@ console.log("What is currentUsername result", currentUsername)
        
         <button className="signOut"
         onClick={() => {setToken('') 
-                       setCurrentUsername('')}}>Sign Out</button>
+                       setCurrentUsername('')
+                       clearCurrentUser();
+                       clearCurrentToken();
+                     }}>Sign Out</button>
             :
         <button className="toggleButton"
         onClick={() => setLoggingIn(!loggingIn)}>{loggingIn ? 'New User? Create Account' : 'Already have an Account? Log In'}</button>

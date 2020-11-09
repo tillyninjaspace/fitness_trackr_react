@@ -11,7 +11,7 @@ const Activities = (props) => {
     const [description, setDescription] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     //temporary id for testing for render
-    const [activityid, setActivityid] = useState('')
+    // const [activityid, setActivityid] = useState('')
     const {token} = props
 
     const handleSubmit = async (event) => {
@@ -35,7 +35,7 @@ const Activities = (props) => {
             console.log("What is the dataJSON from activities form", data)
                 if (data.error) {
                     setErrorMessage('Sorry, your ACTIVITY was not added due to duplicate activity')
-                return
+                    return
                 } else {
                     setErrorMessage('')
                 }
@@ -43,7 +43,8 @@ const Activities = (props) => {
             const newActivitiesList = [...activitiesList, data]
             console.log("What is the New Activities List", newActivitiesList)
             setActivities(newActivitiesList)
-
+            setName('')
+            setDescription('')
         } catch (error) {
             console.error(error)
         }
@@ -71,14 +72,7 @@ const Activities = (props) => {
             { errorMessage ? 
             <p style={{color: "red", backgroundColor: "white"}}>{errorMessage} </p> : ''
             }
-            
-            {/* //temporary id to see if it's going to render */}
-            {/* <input type="number" placeholder="id"
-                value={activityid}
-                onChange={(event) => {
-                    setActivityid(event.target.value)
-                }}
-            /> */}
+              
 
             <input type="text" placeholder="name" 
                 value={ name }
@@ -90,7 +84,6 @@ const Activities = (props) => {
             <input type="text" placeholder="description" 
                 value={ description }
                 onChange={(event) => {
-                    // console.log(description)
                     setDescription(event.target.value)
                 }}
             />
@@ -103,7 +96,6 @@ const Activities = (props) => {
         {
             activitiesList.map((activity)  => 
                 <div key={activity.id} 
-                // <div key={idx} 
                 className='activityItem'>
                 <h3>{activity.name}</h3>
                 <p><b>Description:</b>{activity.description}</p>

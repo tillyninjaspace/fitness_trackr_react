@@ -10,6 +10,10 @@ import {
 
 import { getRoutines,
          getActivities } from './api';
+
+import { getCurrentUser,
+         getCurrentToken } from './auth';
+
 import {
     Header,
     Routines,
@@ -19,6 +23,7 @@ import {
     // SingleUser,
     Footer
   } from './components';
+
 import SingleUser from './components/SingleUser';
 
 
@@ -27,9 +32,11 @@ const App = () => {
     const [routinesList, setRoutines] = useState([])
     const [activitiesList, setActivities] = useState([])
     const [loading, setLoading] = useState(false)
+//Nov 8 changed default state to getCurrentToken() below for localStorage  ..this is also causing a problem
     const [token, setToken] = useState('')
-// Nov 5 working on currentUsername morning    
-    const [currentUsername, setCurrentUsername] = useState('')
+// Nov 8 changed useState from ('') to getCurrentUser() below for localStorage but it is causing posts to now show if
+//user closes browser and then comes back 
+    const [currentUsername, setCurrentUsername] = useState('');
     const [ usernameRoutineList, setUsernameRoutineList] = useState([])
 
     useEffect(() => {
@@ -63,10 +70,21 @@ const App = () => {
 //Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show! Update, adeed currentUsername to show old and new now
     const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
     // console.log("INITIAL LIST", initialList)
+    
+
+    useEffect(() => {
+        const existingToken = setToken(getCurrentToken())
+        const existingUser = setCurrentUsername(getCurrentUser())
+        if (existingToken && existingUser) {
+        setUsernameRoutineList(initialList)
+        }
+    },[])
+    
 
     useEffect(() => {
     setUsernameRoutineList(initialList)
     },[currentUsername])
+
 
 
 
@@ -79,13 +97,22 @@ const App = () => {
        
             <div id="bigHoncho">
                 <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/routines" activeClassName="current">Routines</NavLink>
+                <NavLink to="/" style={{textDecoration: "none"}}>Home</NavLink>
+                <NavLink to="/routines" style={{textDecoration: "none"}} activeClassName="current">Routines</NavLink>
  {/* Nov 8, show MyRoutines only if token                */}
-                { token ? <NavLink to="/my-routines" activeClassName="current">My Routines</NavLink>
+                { token ? <NavLink to="/my-routines" style={{textDecoration: "none"}}
+                    activeClassName="current"
+                    
+                    onClick={() => {
+                        setUsernameRoutineList(initialList)
+                    }}
+                    
+                    
+                    >My Routines</NavLink>
                 : '' }
 {/* End MyRoutines conditional                 */}
-                <NavLink to="/activities" activeClassName="current">Activities</NavLink>
+                <NavLink to="/activities" style={{textDecoration: "none"}}
+                    activeClassName="current">Activities</NavLink>
 
 
                 <Switch>

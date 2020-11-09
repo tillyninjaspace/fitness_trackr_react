@@ -4,7 +4,7 @@ import './Footer.css'
 const Footer = () => {
     return (
         <div className='footer'>
-            <p>This is the footer.</p>
+            <p style={{padding: "5px"}}>&copy; 2020 Fitness Tracker</p>
         </div>
     )
 }

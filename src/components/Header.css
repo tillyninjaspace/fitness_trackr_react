@@ -38,6 +38,7 @@ input {
     padding: 7px;
     color: white;
     border-radius: 5px;
+    text-decoration: none;
 }
 
 .formTitle {
@@ -47,11 +48,15 @@ input {
 .toggleButton,.signOut {
     padding: 5px;
     border-radius: 5px;
+    margin-left: 20px;
 }
 
 .errorMessage {
     color: red;
     background-color: white;
+    margin-left: 20px;
+    padding-left: 5px;
+    max-width: 430px;
 }
 
 .numberInput {
@@ -67,5 +72,5 @@ input {
 
 .option {
     width: 125px;
-    background-color: white;
+    background-color: rgb(133, 148, 161);
 }

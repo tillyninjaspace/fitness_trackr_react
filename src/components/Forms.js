@@ -81,7 +81,7 @@ const NewActivity = (props) => {
                     setDuration(event.target.value)
                 }}
             />
-             <button type="submit" className='submitButton'>Add the Activity</button>
+             <button type="submit" className='submitButton'>Add Activity</button>
             </form>
 
 
