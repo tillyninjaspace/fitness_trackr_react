@@ -10,8 +10,15 @@ import {addActivity} from '../api'
 
 const NewActivity = (props) => {
     const [ activityId, setActivityId] = useState(4)
+    const [activityName, setActivityName] = useState('')
+    const [descriptionName, setDescriptionName] = useState('')
+
+
     const [ count, setCount] = useState(0)
     const [ duration, setDuration] = useState(0)
+
+    const [routineActivityList, setRoutineActivityList] = useState([])
+    console.log("routineActivityList", routineActivityList )
 
     const {activitiesList, routineIdtoAddActivity, token} = props
     // console.log("What are the props under New Activity Form", props)
@@ -21,6 +28,11 @@ const NewActivity = (props) => {
     console.log("What is NEW Activity values for the FORM", "ActivityID:", activityId, "Count:", count, "Duration:", duration, "RoutineID:",routineIdtoAddActivity)
     const newActivityRoutine = await addActivity(routineIdtoAddActivity, token, activityId, count, duration)
     console.log("NEW ACTIVITY ROUTINE", newActivityRoutine)
+    
+    const copy = [...routineActivityList, newActivityRoutine]
+    setRoutineActivityList(copy)
+
+
     setCount(0)
     setDuration(0)
     //TRY CATCH moved to API 
@@ -32,7 +44,32 @@ const NewActivity = (props) => {
     const activity = activitiesList.find(activity => activity.id == id);
     console.log("What is the SELECTED activity", activity)
     setActivityId(activity.id);
+    setActivityName(activity.name)
+    setDescriptionName(activity.description)
   }
+
+  const RoutineActivitiesList = () => {
+    
+    return (
+      <div>
+        <h5>This is the Routine Activities List</h5>
+
+          <div className="routineActivityItem">{
+          routineActivityList.map((routineActivity) => <div key={ routineActivity.id } style={{border: "1px dotted black"}}>
+          <p>Id: { routineActivity.id }</p>
+          <p>Name:</p>
+                    <p>Description:{descriptionName}</p>
+                    <p>Duration: {routineActivity.duration}</p>
+                    <p>Count: {routineActivity.count}</p>
+         
+          </div>)
+          }</div>
+
+      </div>
+    )
+
+  }
+
 
 
 //still working on the handleSubmit button above
@@ -85,8 +122,9 @@ const NewActivity = (props) => {
              <button type="submit" className='submitButton'>Add Activity</button>
             </form>
 
-
+            <RoutineActivitiesList />
         </div>
+        
     )
 }
 

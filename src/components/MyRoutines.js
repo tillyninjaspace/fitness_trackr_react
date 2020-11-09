@@ -34,10 +34,12 @@ console.log(editId)
 
 // ----
     const [ routineIdtoAddActivity, setRoutineIdtoAddActivity ] = useState(1)
+
     console.log("What is the ROUTINE ID TO ADD ACT", routineIdtoAddActivity)
 //Adding an activity ends
     const [routineError, setRoutineError] = useState('')
 
+    
 //Filtering Routines by Logged in Username THIS WORKS
     // const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
     // console.log('routinesbyUserName: ', routinesbyUsername); 
@@ -201,6 +203,7 @@ console.log(editId)
                 <p>Creator: {userRoutine.creatorName}</p>
                 </section>
 {/* activitites  */}
+
         { userRoutine.activities ? 
                 <>
                 <section className="actList">
