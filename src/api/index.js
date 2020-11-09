@@ -73,8 +73,6 @@ export async function deleteRoutine(routineId, token) {
 }
 
 
-//Working on thsi at the moment ERROR 
-//"syntax error at or near "["" On Nov. 7th
 export async function addActivity(routineId, token, activityId, count, duration) {
   try { 
     const response = await fetch(`http://localhost:4000/api/routines/${routineId}/activities`, {
@@ -100,6 +98,31 @@ export async function addActivity(routineId, token, activityId, count, duration)
   console.error(error)
   }
 }
+
+
+//Working on Edit Routine Activity
+export async function editRoutineActivity(routineActivityId, token, count, duration) {
+  try { 
+    const response = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+      },
+    body: JSON.stringify({
+          count,
+          duration
+      })
+    })
+    console.log("What is the response from the EDIT ROUTINE ACTIIVITY form", response)
+    const data = await response.json()
+    console.log("What is the dataJSON from EDIT ROUTINE ACTIVITY FORM", data)
+    return data
+  } catch (error) {
+  console.error(error)
+  }
+}
+
 
 
 

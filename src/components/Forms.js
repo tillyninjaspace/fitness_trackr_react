@@ -17,11 +17,27 @@ const NewActivity = (props) => {
     const [ count, setCount] = useState(0)
     const [ duration, setDuration] = useState(0)
 
+    // const { routineActivityList, setRoutineActivityList } = props
     const [routineActivityList, setRoutineActivityList] = useState([])
     console.log("routineActivityList", routineActivityList )
 
     const {activitiesList, routineIdtoAddActivity, token} = props
     // console.log("What are the props under New Activity Form", props)
+
+//For editing a routine activity
+      // const [ editRoutineActivityDuration, setEditRoutineActivityDuration ] = useState(1)
+      // const [ editRoutineActivityCount, setEditRoutineActivityCount ] = useState(1)
+      // const [ editRoutineActivityId, setEditRoutineActivityId ] = useState(1)
+
+//      const {editRoutineActivityDuration, setEditRoutineActivityDuration,    
+//      editRoutineActivityCount, setEditRoutineActivityCount,
+//      editRoutineActivityId, setEditRoutineActivityId} = props
+
+
+// console.log("What is the EDIT ROUTINE ACTIVITY ID, DURATION and COUNT", editRoutineActivityId,
+// editRoutineActivityDuration, editRoutineActivityCount)
+//for editing a routine activity ends
+
 
     const handleSubmit = async (event) => {
     event.preventDefault()
@@ -46,7 +62,21 @@ const NewActivity = (props) => {
     setActivityId(activity.id);
     setActivityName(activity.name)
     setDescriptionName(activity.description)
+
   }
+
+
+  // const Editing = () => {
+
+  //   return (
+  //       <form>
+  //         <input type="number">Duration</input>
+  //         <input type="number">Count</input>
+  //         <button type="submit">Edit Routine Activity</button>
+  //         </form>
+  //   )
+  // }
+
 
   const RoutineActivitiesList = () => {
     
@@ -56,12 +86,24 @@ const NewActivity = (props) => {
 
           <div className="routineActivityItem">{
           routineActivityList.map((routineActivity) => <div key={ routineActivity.id } style={{border: "1px dotted black"}}>
-          <p>Id: { routineActivity.id }</p>
+          <p>Activity Id: { routineActivity.id }</p>
           <p>Name:</p>
                     <p>Description:{descriptionName}</p>
                     <p>Duration: {routineActivity.duration}</p>
                     <p>Count: {routineActivity.count}</p>
-         
+                    <button style={{backgroundColor: "orange", padding: "5px"}}
+
+//new for editing TEST edit ROUTINE ACTIVITY for API
+                    // onClick={() => {
+                    // setEditRoutineActivityDuration(routineActivity.duration)
+                    // setEditRoutineActivityCount(routineActivity.count)
+                    // setEditRoutineActivityId(routineActivity.id)}}
+     //end new 11/9/2020             
+
+                    >Edit</button>
+
+
+                    <button style={{color: "red", padding: "5px"}}>Delete</button>
           </div>)
           }</div>
 
@@ -69,6 +111,8 @@ const NewActivity = (props) => {
     )
 
   }
+
+
 
 
 
@@ -96,6 +140,18 @@ const NewActivity = (props) => {
                 ))
               }</select>
 
+            <label>Duration:</label>   
+            <input className="numberInput"
+                type="number" 
+                min="0"
+                // placeholder="Duration" 
+                value={ duration }
+                name="duration"
+                onChange={(event) => {
+                    setDuration(event.target.value)
+                }}
+            />
+
 
             <label>Count:</label>    
             <input className="numberInput"
@@ -108,21 +164,13 @@ const NewActivity = (props) => {
                     setCount(event.target.value)
                 }}
             />
-            <label>Duration:</label>   
-            <input className="numberInput"
-                type="number" 
-                min="0"
-                // placeholder="Duration" 
-                value={ duration }
-                name="duration"
-                onChange={(event) => {
-                    setDuration(event.target.value)
-                }}
-            />
+           
              <button type="submit" className='submitButton'>Add Activity</button>
             </form>
-
+          
+           
             <RoutineActivitiesList />
+           
         </div>
         
     )

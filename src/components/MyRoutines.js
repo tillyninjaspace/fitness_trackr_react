@@ -28,10 +28,8 @@ const MyRoutines = (props) => {
 console.log(editId)
 
 //for Adding an activity
-    // const [ activityId, setActivityId] = useState(3)
-    // const [ count, setCount] = useState(0)
-    // const [ duration, setDuration] = useState(0)
-
+const [routineActivityList, setRoutineActivityList] = useState([])
+console.log("what is the routineActivityList under MY ROUTINES SECTION", routineActivityList)
 // ----
     const [ routineIdtoAddActivity, setRoutineIdtoAddActivity ] = useState(1)
 
@@ -39,6 +37,11 @@ console.log(editId)
 //Adding an activity ends
     const [routineError, setRoutineError] = useState('')
 
+// --- for EDITING A ROUTINE activity
+// const [ editRoutineActivityDuration, setEditRoutineActivityDuration ] = useState(1)
+//       const [ editRoutineActivityCount, setEditRoutineActivityCount ] = useState(1)
+//       const [ editRoutineActivityId, setEditRoutineActivityId ] = useState(1)
+// --- End of FOR EDITING A ROUTINE ACTIVITY
     
 //Filtering Routines by Logged in Username THIS WORKS
     // const routinesbyUsername = routinesList.filter(routine => currentUsername === routine.creatorName);
@@ -222,6 +225,7 @@ console.log(editId)
                 : ''
                     
         }     
+
 {/* activities ends */}
 
 
@@ -256,7 +260,16 @@ console.log(editId)
                 <div
                     onClick={(event) => {setRoutineIdtoAddActivity(userRoutine.id)}}>
                 <NewActivity activitiesList={activitiesList} routineIdtoAddActivity={routineIdtoAddActivity}
-                    token={token}  />
+                    token={token} 
+
+                    routineActivityList={routineActivityList} setRoutineActivityList={setRoutineActivityList}
+                    
+    // editRoutineActivityDuration={ editRoutineActivityDuration} setEditRoutineActivityDuration={setEditRoutineActivityDuration}
+    // editRoutineActivityCount={editRoutineActivityCount} setEditRoutineActivityCount={setEditRoutineActivityCount}
+    // editRoutineActivityId={editRoutineActivityId} setEditRoutineActivityId={setEditRoutineActivityId}
+                    
+                    
+                    />
                 </div>
                 </>
 {/* NEW ACTIVITY FORM ENDS */}
@@ -292,7 +305,26 @@ console.log(editId)
             </form>
 
 
-
+{/* Edit RoutineActivity Form             */}
+<form className="editingRoutineActivityForm" style={{backgroundColor: "gray"}} 
+//  onSubmit={(event) => {event.preventDefault()
+//                 console.log("EDIT RC TESTING MODE What are the form values collected?", "RoutineACT ID:", editRoutineActivityId,
+//                 "EDIT RC Duration:", editRoutineActivityDuration, "EDIT RC Count:", editRoutineActivityCount)
+//             }}
+            
+>
+<p>TESTING</p>
+             {/* <label>Duration</label>
+             <input type="number" name="editDuration" 
+             value={ editRoutineActivityDuration}
+                min="0"></input>
+             <label>Count</label>
+             <input type="number" name="editCount" 
+             value={ editRoutineActivityCount }
+                min="0"></input>
+             <button style={{padding: "5px"}}>Edit Me</button> */}
+           </form>
+{/* End of RoutineActivityForm */}
     </div>
     </>
     )
