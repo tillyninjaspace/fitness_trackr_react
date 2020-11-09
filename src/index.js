@@ -72,13 +72,14 @@ const App = () => {
     // console.log("INITIAL LIST", initialList)
     
 
-    useEffect(() => {
-        const existingToken = setToken(getCurrentToken())
-        const existingUser = setCurrentUsername(getCurrentUser())
-        if (existingToken && existingUser) {
-        setUsernameRoutineList(initialList)
-        }
-    },[])
+//LOCAL STORAGE ADD is no bueno
+    // useEffect(() => {
+    //     const existingToken = setToken(getCurrentToken())
+    //     const existingUser = setCurrentUsername(getCurrentUser())
+    //     if (existingToken && existingUser) {
+    //     setUsernameRoutineList(initialList)
+    //     }
+    // },[])
     
 
     useEffect(() => {
@@ -103,9 +104,9 @@ const App = () => {
                 { token ? <NavLink to="/my-routines" style={{textDecoration: "none"}}
                     activeClassName="current"
                     
-                    onClick={() => {
-                        setUsernameRoutineList(initialList)
-                    }}
+                    // onClick={() => {
+                    //     setUsernameRoutineList(initialList)
+                    // }}
                     
                     
                     >My Routines</NavLink>

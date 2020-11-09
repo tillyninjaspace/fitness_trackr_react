@@ -95,6 +95,7 @@ export async function addActivity(routineId, token, activityId, count, duration)
     console.log("What is the response from the ACTIIVITY form", response)
     const data = await response.json()
     console.log("What is the dataJSON from ACTIVITY FORM", data)
+    return data
   } catch (error) {
   console.error(error)
   }

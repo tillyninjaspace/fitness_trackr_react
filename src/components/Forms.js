@@ -16,10 +16,11 @@ const NewActivity = (props) => {
     const {activitiesList, routineIdtoAddActivity, token} = props
     // console.log("What are the props under New Activity Form", props)
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
     event.preventDefault()
     console.log("What is NEW Activity values for the FORM", "ActivityID:", activityId, "Count:", count, "Duration:", duration, "RoutineID:",routineIdtoAddActivity)
-    addActivity(routineIdtoAddActivity, token, activityId, count, duration)
+    const newActivityRoutine = await addActivity(routineIdtoAddActivity, token, activityId, count, duration)
+    console.log("NEW ACTIVITY ROUTINE", newActivityRoutine)
     setCount(0)
     setDuration(0)
     //TRY CATCH moved to API 
@@ -39,12 +40,12 @@ const NewActivity = (props) => {
         <div className='activityForm'>
             <h4 className="activityFormTitle">Add an Activity</h4>
             <form 
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
 
-            onSubmit={(event) => {event.preventDefault()
-                console.log("TESTING MODE What are the form values collected?", "Routine ID:", routineIdtoAddActivity,
-                "Activity ID:", activityId,"Count:", count, "Duration:", duration)
-            }}
+            // onSubmit={(event) => {event.preventDefault()
+            //     console.log("TESTING MODE What are the form values collected?", "Routine ID:", routineIdtoAddActivity,
+            //     "Activity ID:", activityId,"Count:", count, "Duration:", duration)
+            // }}
             
             >
 
