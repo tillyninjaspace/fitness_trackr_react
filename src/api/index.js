@@ -124,7 +124,38 @@ export async function editRoutineActivity(routineActivityId, token, count, durat
 }
 
 
+// working on Delete Routing Activity
+export async function deleteRoutineActivity(routineActivityId, token) {
+  try {
+      const data = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
+          method: "DELETE",
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+              }
+      })
+      console.log("What is the data from the delete button", data)
+      const response = await data.json()
+      console.log("what is the response from the delete button", response)
+      return response
+  } catch (error) {
+      console.error(error)
+  }
+}
 
+
+// Finding User
+export async function getUserRoutines(username) {
+  try {
+    const data  = await fetch(`${ BASE }/users/${username}/routines`);
+    // console.log("What are routines under API section", data)
+    const jsonData = await data.json()
+    console.log("What is the user GET Routines for USER", jsonData)
+    return jsonData
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 

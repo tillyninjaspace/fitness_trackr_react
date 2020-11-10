@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './MyRoutines.css'
 
-import { deleteRoutine, addActivity } from '../api';
+import { deleteRoutine, addActivity, deleteRoutineActivity, getUserRoutines } from '../api';
 
 import NewActivity from './Forms'
 
@@ -24,6 +24,7 @@ const MyRoutines = (props) => {
     const [ editGoal, setEditGoal ] = useState('')
     const [ editId, setEditId ] = useState(1)
     const [ isEditing, setIsEditing] = useState(false)
+    const { hadAChange, setHadAChange } = props
 // useState for Editing ends
 console.log(editId)
 
@@ -66,8 +67,37 @@ console.log("what is the routineActivityList under MY ROUTINES SECTION", routine
 //     // }
 // },[])
 
+useEffect(() => {
+   
+    getUserRoutines(currentUsername)
+       .then(routines => {
+           console.log("What are routines in the GET GET function", routines)
+        setUsernameRoutineList(routines)
+       })
+       .catch(error => {
+           console.error(error)
+       });
+    }, []);
 
-// console.log('usernameRoutinesList: ', usernameRoutineList) 
+
+    ///THIS DEFINITELY WORKS FOR DELETING A ROUTINE ACTIVITY! Nov 9
+
+    useEffect(() => {
+        getUserRoutines(currentUsername)
+           .then(routines => {
+               console.log("What are routines in the GET TWO TWO function", routines)
+            setUsernameRoutineList(routines)
+            setHadAChange(false)
+           })
+           .catch(error => {
+               console.error(error)
+           });
+        }, [hadAChange]);
+    
+
+
+
+console.log('MOO MOO usernameRoutinesList: ', usernameRoutineList) 
 // console.log("activitiesList in My Routines to pass to Forms", activitiesList)
 
     const handleSubmit = async (event) => {
@@ -109,7 +139,10 @@ console.log("what is the routineActivityList under MY ROUTINES SECTION", routine
 
                 newRoutinesList.unshift(data)
                 setRoutines(newRoutinesList)
-     //Trying this again
+
+
+     //Trying this again foR HAD A CHANGE
+                setHadAChange(true)
     //  setChangeRoutineList(true)
      
                 setName('')
@@ -203,12 +236,19 @@ console.log("what is the routineActivityList under MY ROUTINES SECTION", routine
                 <section>
                 <h3>{userRoutine.name}</h3>
                 <p>Goal: {userRoutine.goal}</p>
+
+             {  userRoutine.creatorName ?
                 <p>Creator: {userRoutine.creatorName}</p>
+                : <p>Creator: Me</p>
+
+             }   
                 </section>
+
 {/* activitites  */}
 
-        { userRoutine.activities ? 
-                <>
+
+            { userRoutine.activities ? 
+                 <>
                 <section className="actList">
                 <p>Activities:</p>
                     {userRoutine.activities.map((activity) => 
@@ -217,6 +257,30 @@ console.log("what is the routineActivityList under MY ROUTINES SECTION", routine
                     <p>Description:{activity.description}</p>
                     <p>Duration: {activity.duration}</p>
                     <p>Count: {activity.count}</p>
+                    <button style={{backgroundColor: "pink", padding: "3px"}}
+                    >Edit</button>
+
+                    <button style={{color: "red", padding: "3px"}}
+                    onClick={() => {
+                        console.log("delete routine activity", "routineActivityID:", activity.RoutineActivityId)
+//  Ask for Help  to find Routine Activity ID when it is not in API docs and my own pull. DO I need
+// to edit DATABASE?                    
+                        console.log("What are the userRoutine.activitites", userRoutine.activities)
+                   
+                    const leftover = userRoutine.activities.filter(routineActivity => routineActivity.id !== activity.RoutineActivityId) 
+                    console.log("What is leftover", leftover)
+
+                    userRoutine.activities = leftover
+                    console.log("What are the userRoutine.activities now", userRoutine.activities )
+
+                    setHadAChange(true)
+//    !!!! THIS WORKS BELOW BUT going to do TEST FIRST
+                        const deletedItem = deleteRoutineActivity(activity.RoutineActivityId, token)
+                        // console.log("deleted Routine Activity ID response", deletedItem)
+                    }}
+                    
+                    >Delete</button>
+
                     </div>
                     )
                     }

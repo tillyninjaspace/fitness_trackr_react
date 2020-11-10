@@ -38,6 +38,8 @@ const App = () => {
 //user closes browser and then comes back 
     const [currentUsername, setCurrentUsername] = useState('');
     const [ usernameRoutineList, setUsernameRoutineList] = useState([])
+    const [ hadAChange, setHadAChange] = useState(false)
+
 
     useEffect(() => {
          //need to review
@@ -87,6 +89,18 @@ const App = () => {
     },[currentUsername])
 
 
+    useEffect(() => {
+        //need to review
+       getRoutines()
+           .then(routines => {
+               console.log("What are routines", routines)
+               setRoutines(routines)
+           })
+           .catch(error => {
+               console.error(error)
+           });
+        }, [hadAChange]);
+
 
 
   console.log("What is the token inside of Main Index.JS?", token)
@@ -123,6 +137,7 @@ const App = () => {
                     token={token} routinesList={routinesList} setRoutines={setRoutines}
                     usernameRoutineList={usernameRoutineList} setUsernameRoutineList={setUsernameRoutineList} 
                     activitiesList={activitiesList}
+                    hadAChange={hadAChange} setHadAChange={setHadAChange}
                     /> 
                 </Route>  
             :
@@ -130,7 +145,7 @@ const App = () => {
         }
 
                 <Route exact path="/routines">
-                <Routines routinesList={routinesList}/> </Route> 
+                <Routines routinesList={routinesList} /> </Route> 
 
                 <Route exact path="/activities">          
                 <Activities activitiesList={activitiesList} setActivities={setActivities} token={token}/>

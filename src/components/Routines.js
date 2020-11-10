@@ -17,6 +17,9 @@ const Routines = ({routinesList}) => {
                 <section>
                 <h3>{routine.name}</h3>
                 <p><b>Goal:</b>{routine.goal}</p>
+              {
+
+                routine.creatorName ?
                 <p><b>
         {/* new param STRETCH GOAL -- come back if have time*/}
        {/* {routine.creatorName && <Link to={`/users/${routine.creatorName}/routines`}>{routine.creatorName}</Link>} */}
@@ -24,6 +27,10 @@ const Routines = ({routinesList}) => {
                     Creator:</b>{routine.creatorName}
                     
                 </p>
+                :
+                <p>Creator: Me</p>
+             } 
+
                 </section>
             { routine.activities ? 
                 <section className="actList">

@@ -12,7 +12,7 @@ const NewActivity = (props) => {
     const [ activityId, setActivityId] = useState(4)
     const [activityName, setActivityName] = useState('')
     const [descriptionName, setDescriptionName] = useState('')
-
+  const [ routineActivityErrorMessage, setRoutineActivityErrorMessage] = useState('')
 
     const [ count, setCount] = useState(0)
     const [ duration, setDuration] = useState(0)
@@ -44,6 +44,13 @@ const NewActivity = (props) => {
     console.log("What is NEW Activity values for the FORM", "ActivityID:", activityId, "Count:", count, "Duration:", duration, "RoutineID:",routineIdtoAddActivity)
     const newActivityRoutine = await addActivity(routineIdtoAddActivity, token, activityId, count, duration)
     console.log("NEW ACTIVITY ROUTINE", newActivityRoutine)
+
+    if (newActivityRoutine.error) {
+      setRoutineActivityErrorMessage('Sorry, your ROUTINE ACTIVITY was not added due to duplicate activity')
+      return
+  } else {
+    setRoutineActivityErrorMessage('')
+  }
     
     const copy = [...routineActivityList, newActivityRoutine]
     setRoutineActivityList(copy)
@@ -51,6 +58,7 @@ const NewActivity = (props) => {
 
     setCount(0)
     setDuration(0)
+    setActivityId(0)
     //TRY CATCH moved to API 
     }
 
@@ -83,7 +91,10 @@ const NewActivity = (props) => {
     return (
       <div>
         <h5>This is the Routine Activities List</h5>
-
+        {
+          routineActivityErrorMessage ? 
+            <p style={{color: "red", backgroundColor: "white"}}>{routineActivityErrorMessage} </p> : ''
+        }
           <div className="routineActivityItem">{
           routineActivityList.map((routineActivity) => <div key={ routineActivity.id } style={{border: "1px dotted black"}}>
           <p>Activity Id: { routineActivity.id }</p>
@@ -91,7 +102,7 @@ const NewActivity = (props) => {
                     <p>Description:{descriptionName}</p>
                     <p>Duration: {routineActivity.duration}</p>
                     <p>Count: {routineActivity.count}</p>
-                    <button style={{backgroundColor: "orange", padding: "5px"}}
+                    {/* <button style={{backgroundColor: "orange", padding: "5px"}}
 
 //new for editing TEST edit ROUTINE ACTIVITY for API
                     // onClick={() => {
@@ -100,10 +111,10 @@ const NewActivity = (props) => {
                     // setEditRoutineActivityId(routineActivity.id)}}
      //end new 11/9/2020             
 
-                    >Edit</button>
+                    >Edit</button> */}
 
 
-                    <button style={{color: "red", padding: "5px"}}>Delete</button>
+                    {/* <button style={{color: "red", padding: "5px"}}>Delete</button> */}
           </div>)
           }</div>
 
