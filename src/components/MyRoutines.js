@@ -403,7 +403,7 @@ const handleEditRoutineActivitySubmit = async (event) => {
         {/* Edit RoutineActivity Form             */}   
         <form className="editingRoutineActivityForm"  
         onSubmit={handleEditRoutineActivitySubmit}
-        style={{display: isEditingRA? 'block' : 'none'}}
+        style={{display: isEditingRA? 'block' : 'none', textAlign: "center"}}
             // {(event) => {event.preventDefault()
             //     console.log("EDIT RC TESTING MODE What are the form values collected?", "RoutineACT ID:", editRoutineActivityId,
             //     "EDIT RC Duration:", editRoutineActivityDuration, "EDIT RC Count:", editRoutineActivityCount)

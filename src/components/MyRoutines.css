@@ -84,9 +84,9 @@
 
 .editingRoutineActivityForm {
     background-color: gray;
-    position: relative;
-    bottom: 900px;
-    left: 50px; 
+    position: fixed;
+    bottom: 500px;
+    left: 500px; 
     border: 1px solid black;
     width: 200px;
     /* display:none; */

@@ -110,12 +110,12 @@ const App = () => {
 
     return (
        
-            <div id="bigHoncho">
+            <div id="mainDiv">
                 <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />
-                <NavLink to="/" style={{textDecoration: "none"}}>Home</NavLink>
-                <NavLink to="/routines" style={{textDecoration: "none"}} activeClassName="current">Routines</NavLink>
+                <NavLink to="/" className="nav" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}>Home</NavLink>
+                <NavLink to="/routines" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}} activeClassName="current">Routines</NavLink>
  {/* Nov 8, show MyRoutines only if token                */}
-                { token ? <NavLink to="/my-routines" style={{textDecoration: "none"}}
+                { token ? <NavLink to="/my-routines" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}
                     activeClassName="current"
                     
                     // onClick={() => {
@@ -126,7 +126,7 @@ const App = () => {
                     >My Routines</NavLink>
                 : '' }
 {/* End MyRoutines conditional                 */}
-                <NavLink to="/activities" style={{textDecoration: "none"}}
+                <NavLink to="/activities" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}
                     activeClassName="current">Activities</NavLink>
 
 

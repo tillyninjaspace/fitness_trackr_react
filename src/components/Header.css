@@ -3,12 +3,14 @@ body{
 }
 
 header {
-    background-color:  #2155a3;
+    /* background-color:  #2155a3; */
+    background-color: rgb(0, 0, 0);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .mainHeader {
@@ -26,26 +28,39 @@ header {
 }
 
 .submitButton {
-    padding: 3px;
+    padding: 5px;
+    /* background-color: rgb(248, 204, 122); */
+    background-color:  #2155a3;
+    color: white;
+    border-radius: 5px;
+}
+
+.submitButton:hover{
+    color: white;
+    background-color: black;
+    color: rgb(248, 204, 122);
 }
 
 input {
     padding: 3px;
 }
 
-.current {
+a:visited {
+    color: black;
+}
+
+.current, .current:visited {
     background-color: #2155a3;
     padding: 7px;
     color: white;
     border-radius: 5px;
-    text-decoration: none;
 }
 
 .formTitle {
     color: white;
 }
 
-.toggleButton,.signOut {
+.toggleButton,.signOut, .submitSign {
     padding: 5px;
     border-radius: 5px;
     margin-left: 20px;
@@ -72,5 +87,10 @@ input {
 
 .option {
     width: 125px;
-    background-color: rgb(246, 248, 136);
+    background-color: rgb(248, 204, 122);
+}
+
+.nav {
+    text-decoration: "none";
+    background-color: "#C0C0C0";
 }

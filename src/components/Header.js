@@ -108,7 +108,7 @@ const Header = (props) => {
                           setPassword(event.target.value)
                       }}
                   />
-                   <button type="submit" className='submitButton'>Submit</button>
+                   <button type="submit" className='submitSign'>Log In</button>
                   </form>
       
       
@@ -204,7 +204,7 @@ const Header = (props) => {
                           setNewPassword(event.target.value)
                       }}
                   />
-                   <button type="submit" className='submitButton'>Submit</button>
+                   <button type="submit" className='submitSign'>Create New Account</button>
                   </form>
       
       

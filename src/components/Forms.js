@@ -8,7 +8,7 @@ import './Header.css'
 import {addActivity} from '../api'
 
 const NewActivity = (props) => {
-    const [ activityId, setActivityId] = useState(0)
+    const [ activityId, setActivityId] = useState(10)
     const [activityName, setActivityName] = useState('')
     const [descriptionName, setDescriptionName] = useState('')
   const [ routineActivityErrorMessage, setRoutineActivityErrorMessage] = useState('')
@@ -91,7 +91,7 @@ const NewActivity = (props) => {
     
     return (
       <div>
-        <h5>This is the Routine Activities List</h5>
+        {/* <h5>This is the Routine Activities List</h5> */}
         {
           routineActivityErrorMessage ? 
             <p style={{color: "red", backgroundColor: "white"}}>{routineActivityErrorMessage} </p> : ''
@@ -142,10 +142,11 @@ const NewActivity = (props) => {
             
             >
 
-            <select onChange={ handleSelectChange } className="option" >{
+            <select onChange={ handleSelectChange } className="option">       
+             
+              {
                 activitiesList.map(activity => (
                   <option key={ activity.id } value={ activity.id }
-                  
                   >
                     { activity.name}
                   </option>
