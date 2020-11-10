@@ -25,6 +25,7 @@ const MyRoutines = (props) => {
     const [ editGoal, setEditGoal ] = useState('')
     const [ editId, setEditId ] = useState(1)
     const [ isEditing, setIsEditing] = useState(false)
+    const [ isEditingRA, setIsEditingRA] = useState(false)
     const { hadAChange, setHadAChange } = props
 // useState for Editing ends
 console.log(editId)
@@ -176,20 +177,22 @@ console.log('MOO MOO usernameRoutinesList: ', usernameRoutineList)
             console.log("What is the response from the UPDATED routines form", response)
             const data = await response.json()
             console.log("What is the dataJSON from UPDATED routines form", data)
+
+            setHadAChange(true)
 //Trying Splice -- Worked for updates on both sides
-            const newList = [...routinesList]
-            const newUserRoutinesList = [...usernameRoutineList]
+            // const newList = [...routinesList]
+            // const newUserRoutinesList = [...usernameRoutineList]
 
-            const index = newList.findIndex(a => a.id === editId);
-            console.log("WhaT is this UPDATE index", index)
-            if (index === -1) return;
-            newList.splice(index, 1, data);
-            setRoutines(newList)    
+            // const index = newList.findIndex(a => a.id === editId);
+            // console.log("WhaT is this UPDATE index", index)
+            // if (index === -1) return;
+            // newList.splice(index, 1, data);
+            // setRoutines(newList)    
 
-            const index2 = newUserRoutinesList.findIndex(a => a.id === editId);
-            console.log("WhaT is this UPDATE index", index2)
-            newUserRoutinesList.splice(index2, 1, data);
-            setUsernameRoutineList(newUserRoutinesList)  
+            // const index2 = newUserRoutinesList.findIndex(a => a.id === editId);
+            // console.log("WhaT is this UPDATE index", index2)
+            // newUserRoutinesList.splice(index2, 1, data);
+            // setUsernameRoutineList(newUserRoutinesList)  
 //End Splice
         } catch (error) {
           console.error(error)
@@ -271,13 +274,14 @@ const handleEditRoutineActivitySubmit = async (event) => {
                 <p>Activities:</p>
                     {userRoutine.activities.map((activity) => 
                     <div key={activity.RoutineActivityId} className="eachActivity">
-                    <p>Name:{activity.name}</p>
-                    <p>Description:{activity.description}</p>
+                    <p>Name: {activity.name}</p>
+                    <p>Description: {activity.description}</p>
                     <p>Duration: {activity.duration}</p>
                     <p>Count: {activity.count}</p>
-                    <button style={{backgroundColor: "pink", padding: "3px"}}
+                    <button className="editRoutineActivity"
 // //Editing RA      
                     onClick={() => {
+                        setIsEditingRA(true)
                         setEditRoutineActivityId(activity.RoutineActivityId)
                         setEditRoutineActivityCount(activity.count)
                         setEditRoutineActivityDuration(activity.duration)
@@ -286,23 +290,24 @@ const handleEditRoutineActivitySubmit = async (event) => {
 //                    
                     >Edit</button>
 
-                    <button style={{color: "red", padding: "3px"}}
+                    <button className="delete"
+                    // style={{color: "red", padding: "3px"}}
                     onClick={() => {
                         console.log("delete routine activity", "routineActivityID:", activity.RoutineActivityId)
 //  Ask for Help  to find Routine Activity ID when it is not in API docs and my own pull. DO I need
 // to edit DATABASE?                    
-                        console.log("What are the userRoutine.activitites", userRoutine.activities)
+                    //     console.log("What are the userRoutine.activitites", userRoutine.activities)
                    
-                    const leftover = userRoutine.activities.filter(routineActivity => routineActivity.id !== activity.RoutineActivityId) 
-                    console.log("What is leftover", leftover)
+                    // const leftover = userRoutine.activities.filter(routineActivity => routineActivity.id !== activity.RoutineActivityId) 
+                    // console.log("What is leftover", leftover)
 
-                    userRoutine.activities = leftover
-                    console.log("What are the userRoutine.activities now", userRoutine.activities )
+                    // userRoutine.activities = leftover
+                    // console.log("What are the userRoutine.activities now", userRoutine.activities )
 
                     setHadAChange(true)
 //    !!!! THIS WORKS BELOW BUT going to do TEST FIRST
-                        const deletedItem = deleteRoutineActivity(activity.RoutineActivityId, token)
-                        // console.log("deleted Routine Activity ID response", deletedItem)
+                    deleteRoutineActivity(activity.RoutineActivityId, token)
+                        
                     }}
                     
                     >Delete</button>
@@ -395,10 +400,10 @@ const handleEditRoutineActivitySubmit = async (event) => {
             </form>
 
 
-{/* Edit RoutineActivity Form             */}
-<form className="editingRoutineActivityForm" style={{backgroundColor: "gray"}} 
- onSubmit={handleEditRoutineActivitySubmit}
-            
+        {/* Edit RoutineActivity Form             */}   
+        <form className="editingRoutineActivityForm"  
+        onSubmit={handleEditRoutineActivitySubmit}
+        style={{display: isEditingRA? 'block' : 'none'}}
             // {(event) => {event.preventDefault()
             //     console.log("EDIT RC TESTING MODE What are the form values collected?", "RoutineACT ID:", editRoutineActivityId,
             //     "EDIT RC Duration:", editRoutineActivityDuration, "EDIT RC Count:", editRoutineActivityCount)
@@ -418,7 +423,9 @@ const handleEditRoutineActivitySubmit = async (event) => {
                 value={ editRoutineActivityCount }
                 min="0" onChange={(event) => {
                 setEditRoutineActivityCount(event.target.value)}} />
-             <button style={{padding: "5px"}}>Submit Edit</button>
+             <button style={{padding: "5px"}}>Submit Edit</button><span className="close"
+             onClick={() => setIsEditingRA(false)}
+             >X ClOSE</span>
            </form>
 {/* End of RoutineActivityForm */}
     </div>

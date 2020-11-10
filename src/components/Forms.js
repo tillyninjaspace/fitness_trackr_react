@@ -1,5 +1,4 @@
 //I might not need this section if I add it to the header
-//On Nov 4, I added all of this to the header so I can remove this later. Saving this just in case.
 //Changing this to add Add Activty Form
 //NOV 7, must keep!
 
@@ -9,7 +8,7 @@ import './Header.css'
 import {addActivity} from '../api'
 
 const NewActivity = (props) => {
-    const [ activityId, setActivityId] = useState(4)
+    const [ activityId, setActivityId] = useState(0)
     const [activityName, setActivityName] = useState('')
     const [descriptionName, setDescriptionName] = useState('')
   const [ routineActivityErrorMessage, setRoutineActivityErrorMessage] = useState('')

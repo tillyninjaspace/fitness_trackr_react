@@ -37,8 +37,8 @@ const Routines = ({routinesList}) => {
                 <p>Activities:</p>
                     {routine.activities.map((activity) => 
                     <div key={activity.id} className="eachActivity">
-                    <p>Name:{activity.name}</p>
-                    <p>Description:{activity.description}</p>
+                    <p>Name: {activity.name}</p>
+                    <p>Description: {activity.description}</p>
                     <p>Duration: {activity.duration}</p>
                     <p>Count: {activity.count}</p>
                     </div>

@@ -48,7 +48,8 @@
     top: 500px;
     left: 500px; 
     display:none;
-    background-color: rgb(101, 159, 245);
+    /* background-color: rgb(101, 159, 245); */
+    background-color: orange;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -70,3 +71,27 @@
     display: flex;
     justify-content: space-between;
 }
+
+.editRoutineActivity {
+    color: orange;
+    background-color: gray;
+    padding: 5px;
+}
+
+.editRoutineActivity:hover {
+    background-color: lightgray;
+}
+
+.editingRoutineActivityForm {
+    background-color: gray;
+    position: relative;
+    bottom: 900px;
+    left: 50px; 
+    border: 1px solid black;
+    width: 200px;
+    /* display:none; */
+}
+
+/* .actList {
+    border-radius: 5px;
+} */

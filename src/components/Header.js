@@ -49,24 +49,32 @@ const Header = (props) => {
           const data = await response.json()
           console.log("What is LOG-IN data", data)
           console.log("What is LOG-IN token?", data.token)
+
+        if (data.error) {
+            setErrorMessage(data.message) || setErrorMessage(data.error + '. No matching Username and Password found.')
+        } else {
+            setErrorMessage('')
+        }
        
           await setToken(data.token)
           if (data.token) {
           await setCurrentUsername(data.user.username)
-          }
-//LOCALSTORAGE Nov 8 
+//LOCALSTORAGE Nov 8           
           await storeCurrentUser(data.user.username)
           await storeCurrentToken(data.token)
+          }
+
+        
 //Take 2 on Getting User          
           const trygettinguser = await getUser(data.token)
           console.log("Do we see user info ID", trygettinguser)
 //End Getting User          
           console.log("What is LOG-in token after setToken func", token)
-          if (data.error) {
-            setErrorMessage(data.message) || setErrorMessage(data.error + '. No matching Username and Password found.')
-        } else {
-            setErrorMessage('')
-        }
+        //   if (data.error) {
+        //     setErrorMessage(data.message) || setErrorMessage(data.error + '. No matching Username and Password found.')
+        // } else {
+        //     setErrorMessage('')
+        // }
 
         } catch(error) {
           console.error(error)
