@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './MyRoutines.css'
 
-import { deleteRoutine, addActivity, deleteRoutineActivity, getUserRoutines } from '../api';
+import { deleteRoutine, addActivity, deleteRoutineActivity, getUserRoutines,
+        editRoutineActivity } from '../api';
 
 import NewActivity from './Forms'
 
@@ -39,9 +40,10 @@ console.log("what is the routineActivityList under MY ROUTINES SECTION", routine
     const [routineError, setRoutineError] = useState('')
 
 // --- for EDITING A ROUTINE activity
-// const [ editRoutineActivityDuration, setEditRoutineActivityDuration ] = useState(1)
-//       const [ editRoutineActivityCount, setEditRoutineActivityCount ] = useState(1)
-//       const [ editRoutineActivityId, setEditRoutineActivityId ] = useState(1)
+const [ editRoutineActivityDuration, setEditRoutineActivityDuration ] = useState(0)
+      const [ editRoutineActivityCount, setEditRoutineActivityCount ] = useState(0)
+      const [ editRoutineActivityId, setEditRoutineActivityId ] = useState(0)
+      const [nameOfRoutineActivityEdit, setNameOfRoutineActivityEdit] = useState('')
 // --- End of FOR EDITING A ROUTINE ACTIVITY
     
 //Filtering Routines by Logged in Username THIS WORKS
@@ -190,8 +192,24 @@ console.log('MOO MOO usernameRoutinesList: ', usernameRoutineList)
             setUsernameRoutineList(newUserRoutinesList)  
 //End Splice
         } catch (error) {
-            console.error(error)
+          console.error(error)
         }
+}
+
+//newest handler Nov 10
+const handleEditRoutineActivitySubmit = async (event) => {
+     event.preventDefault()
+    try {
+        const editData = await editRoutineActivity(editRoutineActivityId, token, editRoutineActivityCount, editRoutineActivityDuration)
+        console.log("What is the returned EDIT DATA of RA", editData)
+
+        setHadAChange(true)
+        setEditRoutineActivityId(0)
+        setEditRoutineActivityCount(0)
+        setEditRoutineActivityDuration(0)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
      
@@ -252,12 +270,20 @@ console.log('MOO MOO usernameRoutinesList: ', usernameRoutineList)
                 <section className="actList">
                 <p>Activities:</p>
                     {userRoutine.activities.map((activity) => 
-                    <div key={activity.id} className="eachActivity">
+                    <div key={activity.RoutineActivityId} className="eachActivity">
                     <p>Name:{activity.name}</p>
                     <p>Description:{activity.description}</p>
                     <p>Duration: {activity.duration}</p>
                     <p>Count: {activity.count}</p>
                     <button style={{backgroundColor: "pink", padding: "3px"}}
+// //Editing RA      
+                    onClick={() => {
+                        setEditRoutineActivityId(activity.RoutineActivityId)
+                        setEditRoutineActivityCount(activity.count)
+                        setEditRoutineActivityDuration(activity.duration)
+                        setNameOfRoutineActivityEdit(activity.name)
+                    }}      
+//                    
                     >Edit</button>
 
                     <button style={{color: "red", padding: "3px"}}
@@ -327,7 +353,7 @@ console.log('MOO MOO usernameRoutinesList: ', usernameRoutineList)
                     token={token} 
 
                     routineActivityList={routineActivityList} setRoutineActivityList={setRoutineActivityList}
-                    
+                    hadAChange={hadAChange} setHadAChange={setHadAChange}
     // editRoutineActivityDuration={ editRoutineActivityDuration} setEditRoutineActivityDuration={setEditRoutineActivityDuration}
     // editRoutineActivityCount={editRoutineActivityCount} setEditRoutineActivityCount={setEditRoutineActivityCount}
     // editRoutineActivityId={editRoutineActivityId} setEditRoutineActivityId={setEditRoutineActivityId}
@@ -371,22 +397,28 @@ console.log('MOO MOO usernameRoutinesList: ', usernameRoutineList)
 
 {/* Edit RoutineActivity Form             */}
 <form className="editingRoutineActivityForm" style={{backgroundColor: "gray"}} 
-//  onSubmit={(event) => {event.preventDefault()
-//                 console.log("EDIT RC TESTING MODE What are the form values collected?", "RoutineACT ID:", editRoutineActivityId,
-//                 "EDIT RC Duration:", editRoutineActivityDuration, "EDIT RC Count:", editRoutineActivityCount)
-//             }}
+ onSubmit={handleEditRoutineActivitySubmit}
+            
+            // {(event) => {event.preventDefault()
+            //     console.log("EDIT RC TESTING MODE What are the form values collected?", "RoutineACT ID:", editRoutineActivityId,
+            //     "EDIT RC Duration:", editRoutineActivityDuration, "EDIT RC Count:", editRoutineActivityCount)
+            // }}
             
 >
-<p>TESTING</p>
-             {/* <label>Duration</label>
+            <p>Routine Activity Update:<span>{nameOfRoutineActivityEdit}</span></p>
+            
+            <label>Duration</label>
              <input type="number" name="editDuration" 
-             value={ editRoutineActivityDuration}
-                min="0"></input>
+                value={ editRoutineActivityDuration}
+                min="0" onChange={(event) => {
+                setEditRoutineActivityDuration(event.target.value)}} />
+
              <label>Count</label>
              <input type="number" name="editCount" 
-             value={ editRoutineActivityCount }
-                min="0"></input>
-             <button style={{padding: "5px"}}>Edit Me</button> */}
+                value={ editRoutineActivityCount }
+                min="0" onChange={(event) => {
+                setEditRoutineActivityCount(event.target.value)}} />
+             <button style={{padding: "5px"}}>Submit Edit</button>
            </form>
 {/* End of RoutineActivityForm */}
     </div>

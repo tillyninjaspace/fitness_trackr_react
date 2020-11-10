@@ -22,7 +22,8 @@ const NewActivity = (props) => {
     console.log("routineActivityList", routineActivityList )
 
     const {activitiesList, routineIdtoAddActivity, token} = props
-    // console.log("What are the props under New Activity Form", props)
+    const {hadAChange, setHadAChange} = props
+    console.log("What are the props under New Activity Form", props)
 
 //For editing a routine activity
       // const [ editRoutineActivityDuration, setEditRoutineActivityDuration ] = useState(1)
@@ -51,10 +52,11 @@ const NewActivity = (props) => {
   } else {
     setRoutineActivityErrorMessage('')
   }
-    
-    const copy = [...routineActivityList, newActivityRoutine]
-    setRoutineActivityList(copy)
-
+  
+    // const copy = [...routineActivityList, newActivityRoutine]
+    // setRoutineActivityList(copy)
+    //NEW HERE 11/9
+    setHadAChange(true)
 
     setCount(0)
     setDuration(0)
@@ -132,8 +134,8 @@ const NewActivity = (props) => {
         <div className='activityForm'>
             <h4 className="activityFormTitle">Add an Activity</h4>
             <form 
-            onSubmit={handleSubmit}
-
+            onSubmit={handleSubmit }
+            
             // onSubmit={(event) => {event.preventDefault()
             //     console.log("TESTING MODE What are the form values collected?", "Routine ID:", routineIdtoAddActivity,
             //     "Activity ID:", activityId,"Count:", count, "Duration:", duration)
@@ -176,7 +178,8 @@ const NewActivity = (props) => {
                 }}
             />
            
-             <button type="submit" className='submitButton'>Add Activity</button>
+             <button type="submit" className='submitButton' 
+             >Add Activity</button>
             </form>
           
            
