@@ -8,10 +8,10 @@ import './Header.css'
 import {addActivity} from '../api'
 
 const NewActivity = (props) => {
-    const [ activityId, setActivityId] = useState(10)
+    const [ activityId, setActivityId] = useState(1)
     const [activityName, setActivityName] = useState('')
     const [descriptionName, setDescriptionName] = useState('')
-  const [ routineActivityErrorMessage, setRoutineActivityErrorMessage] = useState('')
+    const [ routineActivityErrorMessage, setRoutineActivityErrorMessage] = useState('')
 
     const [ count, setCount] = useState(0)
     const [ duration, setDuration] = useState(0)
@@ -39,7 +39,7 @@ const NewActivity = (props) => {
 //for editing a routine activity ends
 
 
-    const handleSubmit = async (event) => {
+const handleSubmit = async (event) => {
     event.preventDefault()
     console.log("What is NEW Activity values for the FORM", "ActivityID:", activityId, "Count:", count, "Duration:", duration, "RoutineID:",routineIdtoAddActivity)
     const newActivityRoutine = await addActivity(routineIdtoAddActivity, token, activityId, count, duration)
@@ -60,19 +60,17 @@ const NewActivity = (props) => {
     setCount(0)
     setDuration(0)
     setActivityId(0)
-    //TRY CATCH moved to API 
-    }
+}
 
 
-  const handleSelectChange = (event) => {
+const handleSelectChange = (event) => {
     const id = event.target.value;
     const activity = activitiesList.find(activity => activity.id == id);
     console.log("What is the SELECTED activity", activity)
     setActivityId(activity.id);
     setActivityName(activity.name)
     setDescriptionName(activity.description)
-
-  }
+}
 
 //   const RoutineActivitiesList = () => {
     
@@ -127,9 +125,11 @@ const NewActivity = (props) => {
             // }}
             
             >
-
+              <p>(Select from drop down)</p>
             <select onChange={ handleSelectChange } className="option">       
-            <option selected="selected">-- Select --</option>
+            {/* <option selected="selected">Push</option> */}
+            {/* <option value='selected'>-- SELECT --</option> */}
+         
               {
                 activitiesList.map(activity => (
                   <option key={ activity.id } value={ activity.id }
@@ -143,7 +143,6 @@ const NewActivity = (props) => {
             <input className="numberInput"
                 type="number" 
                 min="0"
-                // placeholder="Duration" 
                 value={ duration }
                 name="duration"
                 onChange={(event) => {
@@ -155,8 +154,7 @@ const NewActivity = (props) => {
             <label>Count:</label>    
             <input className="numberInput"
                 type="number" 
-                min="0"
-                // placeholder="Count" 
+                min="0" 
                 value={ count }
                 name="count"
                 onChange={(event) => {

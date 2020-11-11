@@ -158,6 +158,10 @@ const App = () => {
                 <Route exact path="/">
                 <>    
                 <h2 style={{ padding: ".5em"}}>{token ? `Welcome ${currentUsername}!` : `Please log in.`}</h2>
+                <img src="/fitness-tracker.png" className="banner" alt="fitness tracker banner"/>
+                <h2>Fitness Tracker</h2>
+                <p>Track your work out routines for free here on Fitness Tracker. Register for an account and start 
+                    logging your routine and activities immediately. Stay healthy for longevity.</p>
                  </>
                 </Route>
 
