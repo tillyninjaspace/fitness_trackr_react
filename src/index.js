@@ -32,11 +32,11 @@ const App = () => {
     const [routinesList, setRoutines] = useState([])
     const [activitiesList, setActivities] = useState([])
     const [loading, setLoading] = useState(false)
-//Nov 8 changed default state to getCurrentToken() below for localStorage  ..this is also causing a problem
-    const [token, setToken] = useState('')
+//Nov 8 changed default state to getCurrentToken() below for localStorage instead of ('')  ..this is also causing a problem
+    const [token, setToken] = useState(getCurrentToken())
 // Nov 8 changed useState from ('') to getCurrentUser() below for localStorage but it is causing posts to now show if
 //user closes browser and then comes back 
-    const [currentUsername, setCurrentUsername] = useState('');
+    const [currentUsername, setCurrentUsername] = useState(getCurrentUser());
     const [ usernameRoutineList, setUsernameRoutineList] = useState([])
     const [ hadAChange, setHadAChange] = useState(false)
 
