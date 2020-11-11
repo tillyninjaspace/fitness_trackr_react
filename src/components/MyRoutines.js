@@ -425,7 +425,7 @@ const handleEditRoutineActivitySubmit = async (event) => {
                 setEditRoutineActivityCount(event.target.value)}} />
              <button style={{padding: "5px"}}>Submit Edit</button><span className="close"
              onClick={() => setIsEditingRA(false)}
-             >X ClOSE</span>
+             >X CLOSE</span>
            </form>
 {/* End of RoutineActivityForm */}
     </div>

@@ -156,7 +156,9 @@ const App = () => {
 < SingleUser routinesList={routinesList} currentUsername={currentUsername}/> 
 </Route>
                 <Route exact path="/">
+                <>    
                 <h2 style={{ padding: ".5em"}}>{token ? `Welcome ${currentUsername}!` : `Please log in.`}</h2>
+                 </>
                 </Route>
 
                 <Redirect to="/" />

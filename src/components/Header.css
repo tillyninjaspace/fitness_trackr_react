@@ -4,7 +4,7 @@ body{
 
 header {
     /* background-color:  #2155a3; */
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(6, 82, 63);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -13,12 +13,31 @@ header {
     margin-bottom: 20px;
 }
 
+.image {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 98%;
+}
+
 .mainHeader {
     font-size: 50px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-family: 'Caveat', cursive;
     /* font-family: 'Righteous', cursive; */
     height: 70px;
+    color: white;
+}
+
+a:link {
+    border: 1px solid #2155a3;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+}
+
+a:hover {
+    /* background-color: rgb(248, 204, 122); */
+    background-color: rgb(133, 148, 161);
     color: white;
 }
 
@@ -50,7 +69,8 @@ a:visited {
 }
 
 .current, .current:visited {
-    background-color: #2155a3;
+    /* background-color: #2155a3; */
+    background-color: rgb(6, 82, 63);
     padding: 7px;
     color: white;
     border-radius: 5px;

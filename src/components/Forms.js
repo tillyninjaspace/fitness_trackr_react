@@ -46,11 +46,11 @@ const NewActivity = (props) => {
     console.log("NEW ACTIVITY ROUTINE", newActivityRoutine)
 
     if (newActivityRoutine.error) {
-      setRoutineActivityErrorMessage('Sorry, your ROUTINE ACTIVITY was not added due to duplicate activity')
-      return
-  } else {
-    setRoutineActivityErrorMessage('')
-  }
+      setRoutineActivityErrorMessage('This is a duplicate ROUTINE ACTIVITY. Please delete one of the same ACTIVITIES.')
+      // return
+    } else {
+    setRoutineActivityErrorMessage('') 
+    }
   
     // const copy = [...routineActivityList, newActivityRoutine]
     // setRoutineActivityList(copy)
@@ -74,55 +74,41 @@ const NewActivity = (props) => {
 
   }
 
-
-  // const Editing = () => {
-
-  //   return (
-  //       <form>
-  //         <input type="number">Duration</input>
-  //         <input type="number">Count</input>
-  //         <button type="submit">Edit Routine Activity</button>
-  //         </form>
-  //   )
-  // }
-
-
-  const RoutineActivitiesList = () => {
+//   const RoutineActivitiesList = () => {
     
-    return (
-      <div>
-        {/* <h5>This is the Routine Activities List</h5> */}
-        {
-          routineActivityErrorMessage ? 
-            <p style={{color: "red", backgroundColor: "white"}}>{routineActivityErrorMessage} </p> : ''
-        }
-          <div className="routineActivityItem">{
-          routineActivityList.map((routineActivity) => <div key={ routineActivity.id } style={{border: "1px dotted black"}}>
-          <p>Activity Id: { routineActivity.id }</p>
-          <p>Name:</p>
-                    <p>Description:{descriptionName}</p>
-                    <p>Duration: {routineActivity.duration}</p>
-                    <p>Count: {routineActivity.count}</p>
-                    {/* <button style={{backgroundColor: "orange", padding: "5px"}}
+//     return (
+//       <div>
+//         {
+//           routineActivityErrorMessage ? 
+//             <p style={{color: "red", backgroundColor: "white"}}>{routineActivityErrorMessage} </p> : ''
+//         }
+//           <div className="routineActivityItem">{
+//           routineActivityList.map((routineActivity) => <div key={ routineActivity.id } style={{border: "1px dotted black"}}>
+//           <p>Activity Id: { routineActivity.id }</p>
+//           <p>Name:</p>
+//                     <p>Description:{descriptionName}</p>
+//                     <p>Duration: {routineActivity.duration}</p>
+//                     <p>Count: {routineActivity.count}</p>
+//                     {/* <button style={{backgroundColor: "orange", padding: "5px"}}
 
-//new for editing TEST edit ROUTINE ACTIVITY for API
-                    // onClick={() => {
-                    // setEditRoutineActivityDuration(routineActivity.duration)
-                    // setEditRoutineActivityCount(routineActivity.count)
-                    // setEditRoutineActivityId(routineActivity.id)}}
-     //end new 11/9/2020             
+// //new for editing TEST edit ROUTINE ACTIVITY for API
+//                     // onClick={() => {
+//                     // setEditRoutineActivityDuration(routineActivity.duration)
+//                     // setEditRoutineActivityCount(routineActivity.count)
+//                     // setEditRoutineActivityId(routineActivity.id)}}
+//      //end new 11/9/2020             
 
-                    >Edit</button> */}
+//                     >Edit</button> */}
 
 
-                    {/* <button style={{color: "red", padding: "5px"}}>Delete</button> */}
-          </div>)
-          }</div>
+//                     {/* <button style={{color: "red", padding: "5px"}}>Delete</button> */}
+//           </div>)
+//           }</div>
 
-      </div>
-    )
+//       </div>
+//     )
 
-  }
+//   }
 
 
 
@@ -143,7 +129,7 @@ const NewActivity = (props) => {
             >
 
             <select onChange={ handleSelectChange } className="option">       
-             
+            <option selected="selected">-- Select --</option>
               {
                 activitiesList.map(activity => (
                   <option key={ activity.id } value={ activity.id }
@@ -180,10 +166,16 @@ const NewActivity = (props) => {
            
              <button type="submit" className='submitButton' 
              >Add Activity</button>
+
+        {
+          routineActivityErrorMessage ? 
+            <p style={{color: "red", backgroundColor: "white"}}>{routineActivityErrorMessage} </p> : ''
+        }   
+
             </form>
           
            
-            <RoutineActivitiesList />
+            {/* <RoutineActivitiesList /> */}
            
         </div>
         
