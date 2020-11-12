@@ -7,6 +7,7 @@
 .myRoutineForm button {
     padding: 5px;
 }
+
 .myRoutineForm {
     border: 1px solid gray;
     width: 400px;
@@ -39,16 +40,11 @@
     justify-content: space-around;
 }
 
-.routineCard {
-    width: 400px;
-}
-
 .routineEditForm {
     position: fixed;
     top: 500px;
     left: 500px; 
     display:none;
-    /* background-color: rgb(101, 159, 245); */
     background-color: orange;
     display: flex;
     flex-direction: column;
@@ -89,9 +85,4 @@
     left: 500px; 
     border: 1px solid black;
     width: 200px;
-    /* display:none; */
 }
-
-/* .actList {
-    border-radius: 5px;
-} */

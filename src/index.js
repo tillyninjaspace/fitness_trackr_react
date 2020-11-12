@@ -20,13 +20,9 @@ import {
     Activities,
     Loading,
     MyRoutines,
-    // SingleUser,
+    SingleUser,
     Footer
   } from './components';
-
-import SingleUser from './components/SingleUser';
-
-
 
 const App = () => {
     const [routinesList, setRoutines] = useState([])
@@ -42,7 +38,6 @@ const App = () => {
 
 
     useEffect(() => {
-         //need to review
         setLoading(true)
         getRoutines()
             .then(routines => {
@@ -54,7 +49,6 @@ const App = () => {
             });
            
             
-
         getActivities()
             .then(activities => {
                 console.log("What are activities", activities)
@@ -63,7 +57,6 @@ const App = () => {
             .catch(error => {
                 console.error(error)
             })
-            //need to review loading
             .finally(() => { setLoading(false) })
 
     }, []);
@@ -71,9 +64,6 @@ const App = () => {
     
 //Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show! Update, adeed currentUsername to show old and new now
     const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
-    // console.log("INITIAL LIST", initialList)
-    
-
 //LOCAL STORAGE ADD is no bueno
     // useEffect(() => {
     //     const existingToken = setToken(getCurrentToken())
@@ -90,7 +80,6 @@ const App = () => {
 
 
     useEffect(() => {
-        //need to review
        getRoutines()
            .then(routines => {
                console.log("What are routines", routines)
@@ -99,9 +88,7 @@ const App = () => {
            .catch(error => {
                console.error(error)
            });
-        }, [hadAChange]);
-
-
+    }, [hadAChange]);
 
   console.log("What is the token inside of Main Index.JS?", token)
   console.log("What is the current USERNAME in Main Index", currentUsername)
@@ -109,30 +96,22 @@ const App = () => {
   console.log("What is the routine LIST by LOGGED in USER after NEW ROUTINE", usernameRoutineList)
 
     return (
-       
             <div id="mainDiv">
                 <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />
                 <NavLink to="/" className="nav" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}>Home</NavLink>
                 <NavLink to="/routines" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}} activeClassName="current">Routines</NavLink>
- {/* Nov 8, show MyRoutines only if token                */}
+ 
                 { token ? <NavLink to="/my-routines" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}
-                    activeClassName="current"
-                    
-                    // onClick={() => {
-                    //     setUsernameRoutineList(initialList)
-                    // }}
-                    
-                    
-                    >My Routines</NavLink>
+                    activeClassName="current">My Routines</NavLink>
                 : '' }
-{/* End MyRoutines conditional                 */}
+
                 <NavLink to="/activities" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}
                     activeClassName="current">Activities</NavLink>
 
 
                 <Switch>
 
-        { token ? 
+                { token ? 
                 <Route path="/my-routines"><MyRoutines currentUsername={currentUsername}
                     token={token} routinesList={routinesList} setRoutines={setRoutines}
                     usernameRoutineList={usernameRoutineList} setUsernameRoutineList={setUsernameRoutineList} 
@@ -140,38 +119,38 @@ const App = () => {
                     hadAChange={hadAChange} setHadAChange={setHadAChange}
                     /> 
                 </Route>  
-            :
-            ''    
-        }
+                : ''    
+                }
 
-                <Route exact path="/routines">
-                <Routines routinesList={routinesList} /> </Route> 
+                <Route exact path="/routines"> <Routines routinesList={routinesList} /> </Route> 
 
                 <Route exact path="/activities">          
                 <Activities activitiesList={activitiesList} setActivities={setActivities} token={token}/>
                 </Route> 
+
                 {loading ? <Loading /> : null}
-{/* to get routines by username  Nov 5           */}
-<Route path="/users/:username/routines">
-< SingleUser routinesList={routinesList} currentUsername={currentUsername}/> 
-</Route>
+
+                <Route path="/users/:username/routines">
+                < SingleUser routinesList={routinesList} /> 
+                </Route>
+
                 <Route exact path="/">
                 <>    
-                <h2 style={{ padding: ".5em"}}>{token ? `Welcome ${currentUsername}!` : `Please log in.`}</h2>
-                <img src="/fitness-tracker.png" className="banner" alt="fitness tracker banner"/>
-                <h2>Fitness Tracker</h2>
-                <p>Track your work out routines for free here on Fitness Tracker. Register for an account and start 
-                    logging your routine and activities immediately. Stay healthy for longevity.</p>
-                 </>
+                    <h2 style={{ padding: ".5em"}}>{token ? `Welcome ${currentUsername}!` : `Please log in.`}</h2>
+                    <img src="/fitness-tracker.png" className="banner" alt="fitness tracker banner"/>
+                    <h2>Fitness Tracker</h2>
+                    <p>Track your work out routines for free here on Fitness Tracker. Register for an account and start 
+                    logging your routines and activities immediately. Stay healthy for longevity.</p>
+                </>
                 </Route>
 
                 <Redirect to="/" />
                 </Switch>  
   
-                 <Footer />
+                <Footer />
             </div>
           
-    )
+            )
 }
 
 
@@ -180,7 +159,6 @@ ReactDOM.render(
     <App/>
     </Router> ,
     document.getElementById('root')
-
 )
 
 

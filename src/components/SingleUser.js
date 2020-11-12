@@ -1,52 +1,51 @@
-//STRETCH GOAL --- COME BACK IF HAVE TIME
 import React from 'react';
 import {useParams} from 'react-router-dom';
-import Routines from './Routines'
 
-// console.log("is this working for SINGLEUSER")
-// /users/:username/routines    
-//maybe put username in parameter
 export default (props) => {
     console.log("What are props inside of SingleUser", props)
-    console.log("hello single user")
-    const {username} = useParams();
-    const  {routinesList, currentUsername} = props
+    const { username } = useParams();
+    const  { routinesList } = props
+    const filteredUser = routinesList.filter(routine => username === routine.creatorName);
    
-    const [filteredUser] = routinesList.filter(routine => username === routine.creatorName);
-    console.log('filteredUser: ', filteredUser);
-    // const [filteredUserName] = routinesList.filter(routine => currentUsername === routine.creatorName);
-    //    console.log('filteredUserName: ', filteredUserName);   
-    
     return <>
-      <div>
-      <h1>Single User</h1>
-      <h2>Name: {username} </h2> 
+      <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+      <h1 style={{paddingTop: "5px"}}>User</h1>
+      <h2>Routines by: {username} </h2> 
      
       { console.log("What is filtered User inside of return", filteredUser)}
+
+        <div className="singleUserSection" style={{display: "flex", justifyContent: "center",
+        flexWrap: "wrap"}}>
         { filteredUser && filteredUser.length > 0 &&  filteredUser.map((userRoutine) => 
-                <div key={userRoutine.id}>
-                {userRoutine.name}
+                <div key={userRoutine.id} style={{border: "3px solid rgb(133, 148, 161)",
+                  borderRadius: "5px", width: "250px", padding: "10px"}}>
+                <section>
+                <h3>{username}'s Routine: {userRoutine.name}</h3>
+                <p>Goal: {userRoutine.goal}</p>
+                </section> 
+
+                { userRoutine.activities ? 
+                <>
+                <section className="actList">
+                <p>Activities:</p>
+                    {userRoutine.activities.map((activity, idx) => 
+                    <div key={idx}
+                    className="eachActivity">
+                    <p>Name: {activity.name}</p>
+                    <p>Description: {activity.description}</p>
+                    <p>Duration: {activity.duration}</p>
+                    <p>Count: {activity.count}</p>
+                    </div>
+                    )}
+                </section>
+                </>
+                : ''
+                }      
+
                 </div>
-            )
+            ) 
         }
-    </div>  
+        </div>
+      </div>  
     </>
-  }
-
-
-
-
-
-
-
-
-
-
-  //Extra Stuff
-//   const {username} = useParams();
-       {/* {filteredUser && <Routines userRoutines={filteredUser} />} */}
-//This works but maybe for MyRoutines
-    //    const [filteredUserName] = routinesList.filter(routine => currentUsername === routine.creatorName);
-    //    console.log('filteredUserName: ', filteredUserName);     
-    // const [filteredUser] = routinesList.filter(routine => username === routine.creatorName);
-    // console.log('filteredUser: ', filteredUser);
+};

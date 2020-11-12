@@ -27,8 +27,6 @@ export async function getActivities() {
     }
 }
 
-
-//Nov 6, 2020 Works now
 export async function getUser(token) {
   try { 
     const data = await fetch(`${ BASE }/users/me`, {
@@ -43,17 +41,14 @@ export async function getUser(token) {
     if (!token) {
       return
     } else {
-    return response
+      return response
     }
-    // ^^^ I forgot to return response --  important reminder
 
     } catch(error) {
       throw error;
   }
 }
 
-
-//This works as of Nov. 6th
 export async function deleteRoutine(routineId, token) {
     try {
         const data = await fetch(`http://localhost:4000/api/routines/${routineId}`, {
@@ -96,8 +91,6 @@ export async function addActivity(routineId, token, activityId, count, duration)
   }
 }
 
-
-//Working on Edit Routine Activity
 export async function editRoutineActivity(routineActivityId, token, count, duration) {
   try { 
     const response = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
@@ -120,8 +113,6 @@ export async function editRoutineActivity(routineActivityId, token, count, durat
   }
 }
 
-
-// working on Delete Routing Activity
 export async function deleteRoutineActivity(routineActivityId, token) {
   try {
       const data = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
@@ -140,8 +131,6 @@ export async function deleteRoutineActivity(routineActivityId, token) {
   }
 }
 
-
-// Finding User
 export async function getUserRoutines(username) {
   try {
     const data  = await fetch(`${ BASE }/users/${username}/routines`);
@@ -153,137 +142,3 @@ export async function getUserRoutines(username) {
     throw error;
   }
 }
-
-
-
-// FORMAT TO follow from Routines that returned a correct object format
-// try {
-//   const response = await fetch('http://localhost:4000/api/routines', {
-//       method: "POST",
-//       headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': `Bearer ${token}`
-//           },
-//       body: JSON.stringify({
-//       name: `${name}`,
-//       goal: `${goal}`,
-//       isPublic: `${isPublic}`
-//       })
-//   })
-//   console.log("What is the response from the routines form", response)
-//   const data = await response.json()
-//   console.log("What is the dataJSON from routines form", data)
- 
-//   const newRoutinesList = [...routinesList, data]
-//   console.log("What is the New Routines List", newRoutinesList)
- 
-//   setRoutines(newRoutinesList)
-
-
-// } catch (error) {
-//   console.error(error)
-// }
-
-
-
-
-//Old Jquery Example from my Stranger's things for reference
-// const signUp = async (username, password) => {
-//   try {
-//     const response = await fetch(`${API_URL}/users/register`, {
-//     method: "POST",
-//     headers: 
-//     makeHeaders(),
-//     body: JSON.stringify({
-//       user: {
-//         username: username,
-//         password: password
-//       }
-//     })
-//     })
-//     const responseObj = await response.json();
-//     state.token = responseObj.data && responseObj.data.token;
-//     setToken(responseObj.data.token)
-//     $('.accountError').empty()
-//     $('.accountError').append($(`<p class="message">Your Account was created.<p>`))
-//   } catch (error) {
-//     console.error(error)
-//     $('.accountError').empty()
-//     $('.accountError').prepend($(`<p class="message">Username not available.<p>`))
-//   }
-// };   
-    
-
-// const logIn = async (username, password) => {
-//   try {
-//     const response = await fetch(`${API_URL}/users/login`, {
-//     method: "POST",         
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Authorization': `Bearer ${state.token}`
-//     },
-//     body: JSON.stringify({
-//       user: {
-//         username: username,
-//         password: password
-//       }
-//     })
-//     });
-// const responseObj = await response.json();
-//     setToken(responseObj.data.token)
-//     state.token = responseObj.data && responseObj.data.token;
-//     state.responseObj = responseObj;
-//     const fetchUser = fetchUserData()
-//     $('.signOut').css('display', 'inline-block')
-//     $('.loggingIn').css('display', 'none')
-//     $('.openYourPosts').css('display', 'inline-block')
-//     $('#new-account-form, #account-form').addClass('closed')
-//     populatePosts()
-//     renderLogInMessage()
-//   } catch (error) {
-//     console.error(error)
-//     state.token = ''
-//     $('.asideHeader').empty()
-//     $('.asideHeader').prepend('Username & Password was invalid. You are not logged in.')
-//     $('.messageList').empty()
-//     $(`.welcome-message`).empty()
-//   }
-// };  
-  
-
-// $('#new-account-form').on('submit', async function (event){
-//   event.preventDefault()
-//   const user = {
-//     username: $('#new-username').val(),
-//     password: $('#new-password').val(),
-//   }
-//   try {
-//     const result = await signUp(user.username, user.password)
-//     fetchUserData()
-//     $('.asideHeader').empty()
-//     $('.asideHeader').prepend(`Please log in to start using our services.`)  
-//     $('#new-account-form').trigger('reset')
-//     return result
-//   } catch (error) {
-//     console.log(error)
-//   } 
-// });
-
-
-// $('#account-form').on('submit', async function (event){
-//   event.preventDefault()
-//   const user = {
-//     username: $('#username').val(),
-//     password: $('#password').val(),
-//   }
-//   try {
-//     const result = await logIn(user.username, user.password)
-//     fetchUserData()
-//     populatePosts()
-    
-//     $('#account-form').trigger('reset')
-//     return result
-//   } catch (error) {
-//     console.log(error)
-//   } 
-// });

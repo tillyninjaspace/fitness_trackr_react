@@ -1,10 +1,9 @@
-body{
+body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 header {
     background-color:  #2155a3;
-    /* background-color: rgb(6, 82, 63); */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -23,8 +22,7 @@ header {
 .mainHeader {
     font-size: 50px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-family: 'Caveat', cursive;
-    /* font-family: 'Righteous', cursive; */
+    font-family: 'Righteous', cursive;
     height: 70px;
     color: white;
 }
@@ -36,7 +34,6 @@ a:link {
 }
 
 a:hover {
-    /* background-color: rgb(248, 204, 122); */
     background-color: rgb(133, 148, 161);
     color: white;
 }
@@ -48,7 +45,6 @@ a:hover {
 
 .submitButton {
     padding: 5px;
-    /* background-color: rgb(248, 204, 122); */
     background-color:  #2155a3;
     color: white;
     border-radius: 5px;
@@ -69,7 +65,6 @@ a:visited {
 }
 
 .current, .current:visited {
-    /* background-color: #2155a3; */
     background-color: #2155a3;
     padding: 7px;
     color: white;
@@ -101,7 +96,6 @@ a:visited {
 
 .activityForm {
     border: 1px dotted black;
-    width: 150px;
     text-align: center;
 }
 
