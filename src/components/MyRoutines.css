@@ -86,3 +86,8 @@
     border: 1px solid black;
     width: 200px;
 }
+
+.myRoutineInfo {
+    color: #2155a3;
+    font-weight: bold;
+}

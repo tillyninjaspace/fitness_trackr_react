@@ -3,13 +3,15 @@ import {Link} from 'react-router-dom';
 import './Routines.css'
 
 const Routines = ({routinesList}) => {
+    const publicRoutines = routinesList.filter(routine => routine.isPublic === true )
+
     return (
         <>
         <main>
         <h1 style={{textAlign: "center", paddingTop: "10px"}}>Routines</h1>    
         <div className="routinesSection">     
         {
-            routinesList.map((routine)  => 
+            publicRoutines.map((routine)  => 
                 <div key={routine.id} className='routineItem'>
                 <section>
                 <h3>{routine.name}</h3>

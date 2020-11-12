@@ -28,10 +28,7 @@ const App = () => {
     const [routinesList, setRoutines] = useState([])
     const [activitiesList, setActivities] = useState([])
     const [loading, setLoading] = useState(false)
-//Nov 8 changed default state to getCurrentToken() below for localStorage instead of ('')  ..this is also causing a problem
     const [token, setToken] = useState(getCurrentToken())
-// Nov 8 changed useState from ('') to getCurrentUser() below for localStorage but it is causing posts to now show if
-//user closes browser and then comes back 
     const [currentUsername, setCurrentUsername] = useState(getCurrentUser());
     const [ usernameRoutineList, setUsernameRoutineList] = useState([])
     const [ hadAChange, setHadAChange] = useState(false)
@@ -62,23 +59,6 @@ const App = () => {
     }, []);
 
     
-//Nov 7, Testing This --- PERSISTED for NEW Routine only, old ones don't show! Update, adeed currentUsername to show old and new now
-    const initialList = routinesList.filter(routine => currentUsername === routine.creatorName) 
-//LOCAL STORAGE ADD is no bueno
-    // useEffect(() => {
-    //     const existingToken = setToken(getCurrentToken())
-    //     const existingUser = setCurrentUsername(getCurrentUser())
-    //     if (existingToken && existingUser) {
-    //     setUsernameRoutineList(initialList)
-    //     }
-    // },[])
-    
-
-    useEffect(() => {
-    setUsernameRoutineList(initialList)
-    },[currentUsername])
-
-
     useEffect(() => {
        getRoutines()
            .then(routines => {
@@ -90,27 +70,22 @@ const App = () => {
            });
     }, [hadAChange]);
 
-  console.log("What is the token inside of Main Index.JS?", token)
-  console.log("What is the current USERNAME in Main Index", currentUsername)
-  console.log("What is the ActivitiesList after update", activitiesList)
-  console.log("What is the routine LIST by LOGGED in USER after NEW ROUTINE", usernameRoutineList)
+//   console.log("What is the token inside of Main Index.JS?", token)
+//   console.log("What is the current USERNAME in Main Index", currentUsername)
+//   console.log("What is the ActivitiesList after update", activitiesList)
+//   console.log("What is the routine LIST by LOGGED in USER after NEW ROUTINE", usernameRoutineList)
 
     return (
             <div id="mainDiv">
                 <Header token={token} setToken={setToken} currentUsername={currentUsername} setCurrentUsername={setCurrentUsername} />
                 <NavLink to="/" className="nav" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}>Home</NavLink>
                 <NavLink to="/routines" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}} activeClassName="current">Routines</NavLink>
- 
                 { token ? <NavLink to="/my-routines" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}
                     activeClassName="current">My Routines</NavLink>
                 : '' }
-
                 <NavLink to="/activities" style={{textDecoration: "none", padding: "7px", borderRadius: "5px"}}
                     activeClassName="current">Activities</NavLink>
-
-
                 <Switch>
-
                 { token ? 
                 <Route path="/my-routines"><MyRoutines currentUsername={currentUsername}
                     token={token} routinesList={routinesList} setRoutines={setRoutines}
@@ -121,19 +96,14 @@ const App = () => {
                 </Route>  
                 : ''    
                 }
-
                 <Route exact path="/routines"> <Routines routinesList={routinesList} /> </Route> 
-
                 <Route exact path="/activities">          
                 <Activities activitiesList={activitiesList} setActivities={setActivities} token={token}/>
                 </Route> 
-
                 {loading ? <Loading /> : null}
-
                 <Route path="/users/:username/routines">
                 < SingleUser routinesList={routinesList} /> 
                 </Route>
-
                 <Route exact path="/">
                 <>    
                     <h2 style={{ padding: ".5em"}}>{token ? `Welcome ${currentUsername}!` : `Please log in.`}</h2>
@@ -143,15 +113,13 @@ const App = () => {
                     logging your routines and activities immediately. Stay healthy for longevity.</p>
                 </>
                 </Route>
-
                 <Redirect to="/" />
-                </Switch>  
-  
+                </Switch>   
                 <Footer />
             </div>
           
             )
-}
+};
 
 
 ReactDOM.render(
@@ -160,11 +128,6 @@ ReactDOM.render(
     </Router> ,
     document.getElementById('root')
 )
-
-
-
-
-
 
 
 //STRETCH GOALS FOR LATER:

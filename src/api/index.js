@@ -27,11 +27,11 @@ export async function getUser(token) {
   try { 
     const data = await fetch(`${ BASE }/users/me`, {
     headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer' + " " + token
-    },
-  })
-  const response = await data.json()
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer' + " " + token
+      },
+    })
+    const response = await data.json()
     if (!token) {
       return
     } else {
@@ -104,8 +104,8 @@ export async function deleteRoutineActivity(routineActivityId, token) {
     const data = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
       method: "DELETE",
       headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
         }
       })
       const response = await data.json()

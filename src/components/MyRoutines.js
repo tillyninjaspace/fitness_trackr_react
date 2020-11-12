@@ -11,19 +11,20 @@ const MyRoutines = (props) => {
             usernameRoutineList, setUsernameRoutineList, activitiesList,
             hadAChange, setHadAChange } = props
     
-    const [name, setName] = useState('')
-    const [goal, setGoal] = useState('')
-    const [isPublic, setIsPublic] = useState(true)  
+    const [ name, setName ] = useState('')
+    const [ goal, setGoal ] = useState('')
+    const [ isPublic, setIsPublic ] = useState(true)  
     const [ editName, setEditName ] = useState('')
     const [ editGoal, setEditGoal ] = useState('')
     const [ editId, setEditId ] = useState(1)
-    const [ isEditing, setIsEditing] = useState(false)
-    const [ isEditingRA, setIsEditingRA] = useState(false)
+    const [ isEditing, setIsEditing ] = useState(false)
+    const [ isEditingRA, setIsEditingRA ] = useState(false)
     const [ routineIdtoAddActivity, setRoutineIdtoAddActivity ] = useState(1)
-    const [ routineError, setRoutineError] = useState('')
+    const [ routineError, setRoutineError ] = useState('')
     const [ editRoutineActivityDuration, setEditRoutineActivityDuration ] = useState(0)
     const [ editRoutineActivityCount, setEditRoutineActivityCount ] = useState(0)
     const [ editRoutineActivityId, setEditRoutineActivityId ] = useState(0)
+    const [ editIsPublic, setEditIsPublic ] = useState(true)
     const [ nameOfRoutineActivityEdit, setNameOfRoutineActivityEdit ] = useState('')
 
     useEffect(() => {
@@ -78,6 +79,7 @@ const MyRoutines = (props) => {
                 setHadAChange(true)
                 setName('')
                 setGoal('')
+                setIsPublic(true)
         } catch (error) {
           console.error(error)
         }
@@ -95,7 +97,7 @@ const MyRoutines = (props) => {
                 body: JSON.stringify({
                 name: `${editName}`,
                 goal: `${editGoal}`,
-                isPublic: `${isPublic}`
+                isPublic: `${editIsPublic}`
                 })
             })
             await response.json()
@@ -136,6 +138,13 @@ const MyRoutines = (props) => {
                 <input type="text" placeholder="goal" value={ goal }
                     onChange={(event) => {
                     setGoal(event.target.value)}}/>
+                <label>Is Public?</label>
+                <select value={ isPublic } style={{width: "50px", alignSelf: "center"}}
+                onChange={(event) => {setIsPublic(event.target.value)}}
+                name="isPublic">
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+                </select>
                 <button>Add Routine</button>
                 </form>
 
@@ -148,8 +157,9 @@ const MyRoutines = (props) => {
                 borderRadius: "5px", width: "250px", padding: "10px"}} className="routineCard">
                 <section>
                 <h3>{userRoutine.name}</h3>
-                <p>Goal: {userRoutine.goal}</p>
-                <p>Creator: {userRoutine.creatorName}</p>           
+                <p><span className="myRoutineInfo">Goal:</span>{userRoutine.goal}</p>
+                <p><span className="myRoutineInfo">Creator:</span>{userRoutine.creatorName}</p>   
+                <p className="isPublic"><span className="myRoutineInfo">Is Public:</span>{ userRoutine.isPublic ? 'Yes' : 'No' }</p>      
                 </section>
 
                 { userRoutine.activities ? 
@@ -219,6 +229,12 @@ const MyRoutines = (props) => {
             <input type="text" placeholder="name" value={ editName } onChange={(event) => { setEditName(event.target.value) }}/>
             <label>Goal</label>
             <input type="textarea" placeholder="goal" value={ editGoal } onChange={(event) => {setEditGoal(event.target.value)}}/>
+            <label>Is Public?</label>
+            <select value={ editIsPublic } style={{width: "50px", alignSelf: "center"}}
+                onChange={(event) => {setEditIsPublic(event.target.value)}} name="isPublic">
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+            </select>
             <button style={{padding: "5px", border: "1 solid black"}}>Submit Edit</button>
         </form>
 
