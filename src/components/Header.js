@@ -25,7 +25,6 @@ const Header = (props) => {
         const [password, setPassword] = useState('')
         
         const handleSubmit = async (event) => {
-          console.log("What is LOG-IN username and password input", username, password)
             event.preventDefault();
             try {    
                 const response = await fetch('http://localhost:4000/api/users/login', {
@@ -56,27 +55,18 @@ const Header = (props) => {
         };
       
         return (
-                <div className='forms'>
-                    <h2 className="formTitle">Log In</h2>
-                    <form onSubmit={handleSubmit}>
-                        <input 
-                            type="text" 
-                            placeholder="Username" 
-                            value={ username }
-                            name="username"
-                            onChange={(event) => {
-                            setUsername(event.target.value)}}/>
-      
-                        <input 
-                            type="text" 
-                            placeholder="Password" 
-                            value={ password }
-                            name="password"
-                            onChange={(event) => {
-                            setPassword(event.target.value)}}/>
-                        <button type="submit" className='submitSign'>Log In</button>
-                    </form>
-                </div>
+            <div className='forms'>
+                <h2 className="formTitle">Log In</h2>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder="Username" value={ username }
+                    name="username"
+                    onChange={(event) => { setUsername(event.target.value) }}/>
+                    <input type="text" placeholder="Password" value={ password }
+                    name="password"
+                    onChange={(event) => { setPassword(event.target.value) }}/>
+                    <button type="submit" className='submitSign'>Log In</button>
+                </form>
+            </div>
         )
     };
 
@@ -96,7 +86,7 @@ const Header = (props) => {
                     username: `${newUsername}`,
                     password: `${newPassword}`
                 })
-            });
+                });
                 const data = await response.json()
                 if (data.error) {
                     setErrorMessage(data.message)
@@ -104,7 +94,6 @@ const Header = (props) => {
                 } else {
                     setErrorMessage('')
                 }
-    
                 const newUser = await getUser(data.token)
                 await storeCurrentUser(data.user.username)
                 await storeCurrentToken(data.token)
@@ -113,7 +102,7 @@ const Header = (props) => {
                     await setCurrentUsername(newUser.username)
                 }
             } catch(error) {
-                console.error(error)
+              console.error(error)
             }
         };
 
@@ -121,23 +110,12 @@ const Header = (props) => {
             <div className='forms'>
                 <h2 className="formTitle">New Account</h2>
                 <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        placeholder="Username" 
-                        value={ newUsername }
+                    <input type="text" placeholder="Username" value={ newUsername }
                         name="newusername"
-                        onChange={(event) => {
-                          setNewUsername(event.target.value)
-                        }}/>
-      
-                    <input 
-                        type="text" 
-                        placeholder="Password" 
-                        value={ newPassword }
+                        onChange={(event) => { setNewUsername(event.target.value) }}/>
+                    <input type="text" placeholder="Password" value={ newPassword }
                         name="newpassword"
-                        onChange={(event) => {
-                          setNewPassword(event.target.value)
-                        }}/>
+                        onChange={(event) => { setNewPassword(event.target.value) }}/>
                     <button type="submit" className='submitSign'>Create New Account</button>
                 </form>
             </div>
@@ -160,9 +138,7 @@ const Header = (props) => {
             <button className="toggleButton"
                 onClick={() => setLoggingIn(!loggingIn)}>{loggingIn ? 'New User? Create Account' : 'Already have an Account? Log In'}</button>
         }
-
         { errorMessage ? <p className="errorMessage">{errorMessage}</p> : '' }
-
         <div className="signInForms" style={{display: token? "none" : "block"}}>
         { loggingIn ? <LogInForm /> : <NewAccount /> }
         </div>
