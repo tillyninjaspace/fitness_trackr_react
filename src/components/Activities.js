@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import './Activities.css';
 
-const BASE = 'http://localhost:4000/api'
-// my heroku link: 'http://infinite-thicket-81951.herokuapp.com/api/activities'
-
 const Activities = (props) => {
     const {activitiesList, setActivities, token} = props
     const [name, setName] = useState('')
@@ -13,7 +10,7 @@ const Activities = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch('http://localhost:4000/api/activities', {
+            const response = await fetch('https://infinite-thicket-81951.herokuapp.com/api/activities', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

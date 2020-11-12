@@ -10,10 +10,7 @@ import {
 } from '../auth';
   
 
-const BASE = 'http://localhost:4000/api'
-
-// const BASE = 'http://infinite-thicket-81951.herokuapp.com/api'
-
+const BASE = 'https://infinite-thicket-81951.herokuapp.com/api'
 
 const Header = (props) => {
     const [loggingIn, setLoggingIn] = useState(true)
@@ -27,7 +24,7 @@ const Header = (props) => {
         const handleSubmit = async (event) => {
             event.preventDefault();
             try {    
-                const response = await fetch('http://localhost:4000/api/users/login', {
+                const response = await fetch(`${BASE}/users/login`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,7 +74,7 @@ const Header = (props) => {
         const handleSubmit = async (event) => {
             event.preventDefault();
             try {    
-                const response = await fetch('http://localhost:4000/api/users/register', {
+                const response = await fetch(`${BASE}/users/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

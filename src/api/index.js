@@ -1,7 +1,4 @@
-const BASE = 'http://localhost:4000/api'
-const BASE2 = `http://infinite-thicket-81951.herokuapp.com/api`
-// `http://infinite-thicket-81951.herokuapp.com/api/routines`
-// const BASE = 'http://fitnesstrac-kr.herokuapp.com/api/'
+const BASE = `http://infinite-thicket-81951.herokuapp.com/api`
 
 export async function getRoutines() {
     try {
@@ -44,7 +41,7 @@ export async function getUser(token) {
 
 export async function deleteRoutine(routineId, token) {
   try {
-    const data = await fetch(`http://localhost:4000/api/routines/${routineId}`, {
+    const data = await fetch(`${ BASE }/routines/${routineId}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +57,7 @@ export async function deleteRoutine(routineId, token) {
 
 export async function addActivity(routineId, token, activityId, count, duration) {
   try { 
-    const response = await fetch(`http://localhost:4000/api/routines/${routineId}/activities`, {
+    const response = await fetch(`${ BASE }/routines/${routineId}/activities`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
@@ -81,7 +78,7 @@ export async function addActivity(routineId, token, activityId, count, duration)
 
 export async function editRoutineActivity(routineActivityId, token, count, duration) {
   try { 
-    const response = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
+    const response = await fetch(`${ BASE }/routine_activities/${routineActivityId}`, {
     method: "PATCH",
     headers: {
       'Content-Type': 'application/json',
@@ -101,7 +98,7 @@ export async function editRoutineActivity(routineActivityId, token, count, durat
 
 export async function deleteRoutineActivity(routineActivityId, token) {
   try {
-    const data = await fetch(`http://localhost:4000/api/routine_activities/${routineActivityId}`, {
+    const data = await fetch(`${ BASE }/routine_activities/${routineActivityId}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',

@@ -51,7 +51,7 @@ const MyRoutines = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch('http://localhost:4000/api/routines', {
+            const response = await fetch('https://infinite-thicket-81951.herokuapp.com/api/routines', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const MyRoutines = (props) => {
     const handleEditSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch(`http://localhost:4000/api/routines/${editId}`, {
+            const response = await fetch(`https://infinite-thicket-81951.herokuapp.com/api/routines/${editId}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
