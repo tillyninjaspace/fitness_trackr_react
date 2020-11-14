@@ -1,4 +1,4 @@
-const BASE = `http://infinite-thicket-81951.herokuapp.com/api`
+const BASE = `https://infinite-thicket-81951.herokuapp.com/api`
 
 export async function getRoutines() {
     try {
