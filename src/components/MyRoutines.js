@@ -70,12 +70,6 @@ const MyRoutines = (props) => {
                 } else {
                     setRoutineError('')
                 }
-                const newRoutinesList = [...routinesList]
-                const newUserRoutinesList = [...usernameRoutineList]
-                newUserRoutinesList.unshift(data)
-                setUsernameRoutineList(newUserRoutinesList)
-                newRoutinesList.unshift(data)
-                setRoutines(newRoutinesList)
                 setHadAChange(true)
                 setName('')
                 setGoal('')
@@ -200,11 +194,11 @@ const MyRoutines = (props) => {
                 <button className="delete" onClick={(event) => {
                 const newList = [...routinesList]
                 const newUserList = [...usernameRoutineList]
-                const index = newList.findIndex(a => a.id === userRoutine.id);
+                const index = newList.findIndex(routine => routine.id === userRoutine.id);
                 if (index === -1) return;
                 newList.splice(index, 1);
                 setRoutines(newList)
-                const index2 = newUserList.findIndex(a => a.id === userRoutine.id);
+                const index2 = newUserList.findIndex(routine  => routine.id === userRoutine.id);
                 if (index2 === -1) return;
                 newUserList.splice(index2, 1);
                 setUsernameRoutineList(newUserList)
