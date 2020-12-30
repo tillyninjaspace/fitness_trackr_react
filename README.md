@@ -1,7 +1,7 @@
 # UNIV_FitnessTrackr_React
+	
+Role: Full Stack Developer
 
-Fitness Tracker		
-Role: Full Stack Developer				
 Project Completed: 10/20
 
 Fitness Tracker is a fitness tracking website that allows users to track their work outs. 
