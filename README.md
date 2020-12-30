@@ -7,4 +7,6 @@ Project Completed: 10/20
 Fitness Tracker is a fitness tracking website that allows users to track their work outs. 
 Built a fully functional full stack application beginning with the back end API using Express, PostgreSQL, and Node and finished the front end with React, JavaScript, CSS and HTML
 
+See my portfolio: https://gracious-mcnulty-e733ac.netlify.app/portfolio.html
+
 Developer: Tilly Wright
